@@ -225,6 +225,21 @@ final class MPTY_Zen {
 			return;
 		}
 
+		if ( $is_settings_page ) {
+			wp_enqueue_style( 'common' );
+			wp_add_inline_style(
+				'common',
+				'.mpty-zen-products{display:grid;gap:8px;max-width:760px;margin:12px 0 0}' .
+				'.mpty-zen-product{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0;padding:12px 14px;border:1px solid #c3c4c7;border-radius:2px;background:#fff}' .
+				'.mpty-zen-product-copy{min-width:0}' .
+				'.mpty-zen-product-name{display:block;font-size:14px;line-height:1.4}' .
+				'.mpty-zen-product-description{margin:2px 0 0;color:#50575e}' .
+				'.mpty-zen-product-status{flex:0 0 auto;padding:1px 7px;border:1px solid #c3c4c7;border-radius:10px;background:#f6f7f7;color:#50575e;font-size:12px;line-height:1.5}' .
+				'.mpty-zen-product-status.is-active{border-color:#8cba92;background:#f0f6f1;color:#005a24}' .
+				'@media screen and (max-width:600px){.mpty-zen-product{align-items:flex-start;flex-direction:column;gap:8px}}'
+			);
+		}
+
 		wp_enqueue_script(
 			'mpty-zen-classifier',
 			MPTY_ZEN_URL . 'assets/js/classifier.js',
@@ -335,7 +350,6 @@ final class MPTY_Zen {
 		}
 
 		$installed = get_plugins();
-		$installed_names = wp_list_pluck( $installed, 'Name' );
 		$products  = array(
 			array(
 				'name'        => 'Guard by MPTY',
@@ -350,17 +364,53 @@ final class MPTY_Zen {
 		);
 		?>
 		<hr>
-		<h2><?php echo esc_html__( 'Other MPTY tools', 'zen-by-mpty' ); ?></h2>
-		<ul>
+		<h2 id="mpty-zen-products-title"><?php echo esc_html__( 'Other MPTY tools', 'zen-by-mpty' ); ?></h2>
+		<p><?php echo esc_html__( 'A small selection of other tools from MPTY Projects.', 'zen-by-mpty' ); ?></p>
+		<ul class="mpty-zen-products" aria-labelledby="mpty-zen-products-title">
 			<?php foreach ( $products as $product ) : ?>
-				<?php $is_installed = isset( $installed[ $product['plugin_file'] ] ) || in_array( $product['name'], $installed_names, true ); ?>
-				<li>
-					<strong><?php echo esc_html( $product['name'] ); ?></strong>
-					&mdash; <?php echo esc_html( $product['description'] ); ?>
-					<span><?php echo esc_html( $is_installed ? __( 'Installed', 'zen-by-mpty' ) : __( 'Not installed', 'zen-by-mpty' ) ); ?></span>
+				<?php
+				$product_status = $this->get_mpty_product_status( $product, $installed );
+				$status_labels  = array(
+					'active'        => __( 'Active', 'zen-by-mpty' ),
+					'installed'     => __( 'Installed', 'zen-by-mpty' ),
+					'not-installed' => __( 'Not installed', 'zen-by-mpty' ),
+				);
+				?>
+				<li class="mpty-zen-product">
+					<div class="mpty-zen-product-copy">
+						<strong class="mpty-zen-product-name"><?php echo esc_html( $product['name'] ); ?></strong>
+						<p class="mpty-zen-product-description"><?php echo esc_html( $product['description'] ); ?></p>
+					</div>
+					<span class="<?php echo esc_attr( 'mpty-zen-product-status is-' . $product_status ); ?>"><?php echo esc_html( $status_labels[ $product_status ] ); ?></span>
 				</li>
 			<?php endforeach; ?>
 		</ul>
 		<?php
+	}
+
+	/**
+	 * Resolve an MPTY product's local installation and activation state.
+	 *
+	 * @param array{name:string,plugin_file:string,description:string} $product    Product definition.
+	 * @param array<string,array<string,string>>                       $installed Installed plugin headers keyed by plugin file.
+	 * @return string One of active, installed, or not-installed.
+	 */
+	private function get_mpty_product_status( array $product, array $installed ): string {
+		$plugin_file = isset( $installed[ $product['plugin_file'] ] ) ? $product['plugin_file'] : '';
+
+		if ( '' === $plugin_file ) {
+			foreach ( $installed as $installed_file => $plugin_data ) {
+				if ( isset( $plugin_data['Name'] ) && $product['name'] === $plugin_data['Name'] ) {
+					$plugin_file = $installed_file;
+					break;
+				}
+			}
+		}
+
+		if ( '' === $plugin_file ) {
+			return 'not-installed';
+		}
+
+		return is_plugin_active( $plugin_file ) ? 'active' : 'installed';
 	}
 }

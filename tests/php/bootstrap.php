@@ -11,6 +11,7 @@ define( 'MPTY_ZEN_FILE', ABSPATH . 'zen-by-mpty.php' );
 
 /** Test option storage. */
 $GLOBALS['mpty_zen_test_options'] = array();
+$GLOBALS['mpty_zen_test_active_plugins'] = array();
 
 function add_action() {}
 function add_filter() {}
@@ -38,6 +39,16 @@ function delete_option( $name ) {
 
 function wp_parse_args( $args, $defaults = array() ) {
 	return array_merge( $defaults, $args );
+}
+
+/**
+ * Test seam for WordPress plugin activation state.
+ *
+ * @param string $plugin_file Plugin basename.
+ * @return bool
+ */
+function is_plugin_active( $plugin_file ) {
+	return in_array( $plugin_file, $GLOBALS['mpty_zen_test_active_plugins'], true );
 }
 
 require_once ABSPATH . 'includes/class-mpty-zen.php';
