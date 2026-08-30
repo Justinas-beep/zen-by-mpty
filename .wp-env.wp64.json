@@ -1,0 +1,11 @@
+{
+  "core": "WordPress/WordPress#6.4",
+  "phpVersion": "7.4",
+  "plugins": ["."],
+  "config": {
+    "MPTY_ZEN_EXPECTED_WP": "6.4",
+    "MPTY_ZEN_EXPECTED_PHP": "7.4",
+    "WP_DEBUG": true,
+    "SCRIPT_DEBUG": true
+  }
+}

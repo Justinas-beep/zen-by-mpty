@@ -1,19 +1,20 @@
 === Zen by MPTY ===
+Contributors: mpty-projects
 Tags: admin, notices, cleanup, productivity, dashboard
 Requires at least: 6.4
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.5.0
+Stable tag: 0.6.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Keep WordPress admin focused by hiding promotional clutter while keeping important notices visible.
+A quieter WordPress admin, with less promotional clutter and fewer distractions.
 
 == Description ==
 
-Zen by MPTY reduces noise in WordPress admin by hiding promotional notices, review requests, upsells, sales banners and other promotional content.
+Zen by MPTY makes WordPress admin quieter by hiding promotional notices, review requests, upsells, sales banners and other non-essential marketing content.
 
-Important notices stay visible. Zen is designed to preserve operational, security, update, compatibility and error information. If Zen is unsure about an item, it leaves it visible.
+Zen uses conservative local classification designed to leave operational, security, update, compatibility and error information visible. If Zen is unsure about an item, it leaves it visible.
 
 Zen only changes what is shown in WordPress admin. It does not delete another plugin's notices, settings, database records or other data.
 
@@ -53,12 +54,20 @@ No. Zen works locally and makes no remote requests.
 
 == Changelog ==
 
+= 0.6.0 =
+* Added retained classifier and admin DOM regression coverage with false-positive safety as the priority.
+* Prevented promotional child actions from hiding unrelated functional parent containers.
+* Preserved exact inline display and accessibility state across Pause and Resume cycles.
+* Bounded dynamic DOM processing and yielded between large batches.
+* Added lightweight PHP and JavaScript engineering checks plus Zen-specific release standards.
+* Added a restrained, local-only list of other MPTY tools to Zen's settings page.
+* Refined product wording around a quieter WordPress admin and conservative classification.
+
 = 0.5.0 =
 * Renamed the previous development identity to Zen by MPTY and changed the developer identity to MPTY Projects.
 * Migrated PHP, JavaScript, DOM, asset, settings, build and package identifiers to the canonical MPTY identity.
 * Added a one-time settings migration from previous development settings to the canonical MPTY settings key.
 * Changed the plugin directory/text domain to zen-by-mpty before public distribution.
-* No classifier decision rules were changed.
 
 = 0.4.4 =
 * Removed the hidden-item counter from the settings screen because it did not provide useful configuration context.
@@ -98,5 +107,5 @@ No. Zen works locally and makes no remote requests.
 
 == Upgrade Notice ==
 
-= 0.5.0 =
-Zen is now Zen by MPTY. Existing 0.4.x settings are migrated automatically on first activation/admin load.
+= 0.6.0 =
+Zen now uses stricter false-positive protections and faithfully restores page display state when paused.

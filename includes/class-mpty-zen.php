@@ -9,6 +9,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Coordinates Zen's settings page and conservative admin classifier.
+ */
 final class MPTY_Zen {
 
 	/**
@@ -59,7 +62,7 @@ final class MPTY_Zen {
 	/**
 	 * Run activation tasks.
 	 */
-	public static function activate() {
+	public static function activate(): void {
 		self::maybe_migrate_legacy_settings();
 	}
 
@@ -97,7 +100,7 @@ final class MPTY_Zen {
 	 * The old frontend-credit and safety-toggle settings are deliberately not
 	 * migrated because those capabilities are not part of Zen's product scope.
 	 */
-	public static function maybe_migrate_legacy_settings() {
+	public static function maybe_migrate_legacy_settings(): void {
 		if ( get_option( self::MIGRATION_OPTION, false ) ) {
 			return;
 		}
@@ -153,7 +156,7 @@ final class MPTY_Zen {
 	/**
 	 * Register plugin settings.
 	 */
-	public function register_settings() {
+	public function register_settings(): void {
 		register_setting(
 			'mpty_zen',
 			self::OPTION_NAME,
@@ -186,7 +189,7 @@ final class MPTY_Zen {
 	/**
 	 * Register the settings screen under Settings.
 	 */
-	public function register_settings_page() {
+	public function register_settings_page(): void {
 		add_options_page(
 			__( 'Zen by MPTY', 'zen-by-mpty' ),
 			__( 'Zen by MPTY', 'zen-by-mpty' ),
@@ -214,7 +217,7 @@ final class MPTY_Zen {
 	 *
 	 * @param string $hook_suffix Current admin screen hook suffix.
 	 */
-	public function enqueue_admin_assets( $hook_suffix ) {
+	public function enqueue_admin_assets( $hook_suffix ): void {
 		$settings         = $this->get_settings();
 		$is_settings_page = 'settings_page_zen-by-mpty' === $hook_suffix;
 
@@ -264,7 +267,7 @@ final class MPTY_Zen {
 	/**
 	 * Render plugin settings.
 	 */
-	public function render_settings_page() {
+	public function render_settings_page(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
@@ -273,8 +276,8 @@ final class MPTY_Zen {
 		?>
 		<div class="wrap mpty-zen-wrap">
 			<h1><?php echo esc_html__( 'Zen by MPTY', 'zen-by-mpty' ); ?></h1>
-			<p><?php echo esc_html__( 'Keep WordPress admin focused by hiding promotional clutter.', 'zen-by-mpty' ); ?></p>
-			<p><?php echo esc_html__( 'Important notices stay visible. If Zen is unsure, it leaves the item visible.', 'zen-by-mpty' ); ?></p>
+			<p><?php echo esc_html__( 'A quieter WordPress admin, without changing how WordPress works.', 'zen-by-mpty' ); ?></p>
+			<p><?php echo esc_html__( 'Zen conservatively hides promotional clutter. If it is unsure, it leaves the item visible.', 'zen-by-mpty' ); ?></p>
 
 			<form method="post" action="options.php">
 				<?php settings_fields( 'mpty_zen' ); ?>
@@ -289,11 +292,13 @@ final class MPTY_Zen {
 
 			<hr>
 			<h2><?php echo esc_html__( 'Temporarily show hidden items', 'zen-by-mpty' ); ?></h2>
-			<p id="mpty-zen-reveal-help"><?php echo esc_html__( 'Pause Zen to see everything plugins are displaying.', 'zen-by-mpty' ); ?></p>
+			<p id="mpty-zen-reveal-help" aria-live="polite"><?php echo esc_html__( 'Pause Zen to see everything plugins are displaying.', 'zen-by-mpty' ); ?></p>
 			<p>
 				<button type="button" class="button" id="mpty-zen-toggle-reveal" aria-pressed="false"><?php echo esc_html__( 'Pause Zen', 'zen-by-mpty' ); ?></button>
 			</p>
 			<p><small><?php echo esc_html( sprintf( /* translators: %s: plugin version. */ __( 'Version %s', 'zen-by-mpty' ), MPTY_ZEN_VERSION ) ); ?></small></p>
+
+			<?php $this->render_mpty_products(); ?>
 		</div>
 		<?php
 	}
@@ -306,7 +311,7 @@ final class MPTY_Zen {
 	 * @param string            $description Visible description.
 	 * @param array<string,int> $settings    Current settings.
 	 */
-	private function render_checkbox_row( $key, $label, $description, $settings ) {
+	private function render_checkbox_row( $key, $label, $description, $settings ): void {
 		$field_id = 'mpty-zen-' . sanitize_html_class( $key );
 		?>
 		<tr>
@@ -318,6 +323,44 @@ final class MPTY_Zen {
 				</label>
 			</td>
 		</tr>
+		<?php
+	}
+
+	/**
+	 * Render a restrained, local-only list of other MPTY products.
+	 */
+	private function render_mpty_products(): void {
+		if ( ! function_exists( 'get_plugins' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+
+		$installed = get_plugins();
+		$installed_names = wp_list_pluck( $installed, 'Name' );
+		$products  = array(
+			array(
+				'name'        => 'Guard by MPTY',
+				'plugin_file' => 'guard-by-mpty/guard-by-mpty.php',
+				'description' => __( 'Local WordPress security and recovery tools.', 'zen-by-mpty' ),
+			),
+			array(
+				'name'        => 'Sign by MPTY',
+				'plugin_file' => 'sign-by-mpty/sign-by-mpty.php',
+				'description' => __( 'Visitor registration, consent and electronic signature records.', 'zen-by-mpty' ),
+			),
+		);
+		?>
+		<hr>
+		<h2><?php echo esc_html__( 'Other MPTY tools', 'zen-by-mpty' ); ?></h2>
+		<ul>
+			<?php foreach ( $products as $product ) : ?>
+				<?php $is_installed = isset( $installed[ $product['plugin_file'] ] ) || in_array( $product['name'], $installed_names, true ); ?>
+				<li>
+					<strong><?php echo esc_html( $product['name'] ); ?></strong>
+					&mdash; <?php echo esc_html( $product['description'] ); ?>
+					<span><?php echo esc_html( $is_installed ? __( 'Installed', 'zen-by-mpty' ) : __( 'Not installed', 'zen-by-mpty' ) ); ?></span>
+				</li>
+			<?php endforeach; ?>
+		</ul>
 		<?php
 	}
 }

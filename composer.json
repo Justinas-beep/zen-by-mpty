@@ -1,0 +1,42 @@
+{
+    "name": "mpty/zen-by-mpty",
+    "description": "Development tooling for Zen by MPTY",
+    "type": "project",
+    "require-dev": {
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.2",
+        "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^9.6",
+        "squizlabs/php_codesniffer": "^3.13",
+        "szepeviktor/phpstan-wordpress": "^2.0",
+        "wp-coding-standards/wpcs": "^3.2"
+    },
+    "scripts": {
+        "syntax": [
+            "@php -l zen-by-mpty.php",
+            "@php -l includes/class-mpty-zen.php",
+            "@php -l uninstall.php",
+            "@php -l scripts/build-production.php",
+            "@php -l scripts/production-manifest.php",
+            "@php -l tests/integration/smoke.php"
+        ],
+        "build": "@php scripts/build-production.php build --source=. --output=build",
+        "validate-artifact": "@php scripts/build-production.php validate --source=. --zip=build/zen-by-mpty-0.6.0.zip",
+        "check": [
+            "@syntax",
+            "phpstan analyse --memory-limit=1G",
+            "phpcs -n",
+            "phpunit",
+            "npm test"
+        ],
+        "check-release": [
+            "@check",
+            "@build"
+        ]
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        },
+        "sort-packages": true
+    }
+}

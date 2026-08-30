@@ -44,7 +44,11 @@
 		['license-operational', /\blicense\s+(?:invalid|expired)\b.{0,120}\b(?:updates?|service|feature|backup|scan|support)\b/i, 9],
 		['wordpress-update', /\bwordpress\b.{0,120}\b(?:update(?:\s+now)?|please update|is available|new version)\b/i, 10],
 		['update-failed', /\b(?:wordpress|plugin|theme|core)?\s*update\s+(?:failed|failure|error|required)\b/i, 11],
-		['woocommerce-operational', /\bwoocommerce\b.{0,120}\b(?:database\s+update|required|failed|failure|error|critical|action required|configuration)\b/i, 10]
+		['woocommerce-operational', /\bwoocommerce\b.{0,120}\b(?:database\s+update|required|failed|failure|error|critical|action required|configuration)\b/i, 10],
+		['service-unavailable', /\b(?:api|service|integration)\b.{0,80}\b(?:unavailable|failed|failure|error|disconnected|not connected)\b/i, 11],
+		['credential-problem', /\b(?:credential|credentials|api key|access token)\b.{0,80}\b(?:expired|invalid|missing|required|revoked)\b/i, 11],
+		['setup-required', /\b(?:setup|set up|configuration)\b.{0,80}\b(?:required|incomplete|missing)\b/i, 10],
+		['destructive-confirmation', /\b(?:confirm|confirmation)\b.{0,80}\b(?:delete|remove|erase|reset|permanent|cannot be undone)\b/i, 12]
 	];
 
 	const promoPatterns = [

@@ -7,8 +7,10 @@
 	const revealKey = boot.revealKey || 'mpty_zen_reveal_v1';
 	const hiddenClass = 'mpty-zen-suppressed';
 	const MAX_TEXT = 7000;
+	const MAX_NODES_PER_BATCH = 40;
 	const featureCache = new WeakMap();
 	const decisionCache = new WeakMap();
+	const suppressedState = new WeakMap();
 	const pendingNodes = new Set();
 	let batchScheduled = false;
 	let observer = null;
@@ -257,6 +259,14 @@
 			return;
 		}
 
+		suppressedState.set(element, {
+			display: element.style.getPropertyValue('display'),
+			displayPriority: element.style.getPropertyPriority('display'),
+			hadAriaHidden: element.hasAttribute('aria-hidden'),
+			ariaHidden: element.getAttribute('aria-hidden'),
+			hadReason: element.hasAttribute('data-mpty-zen-reason'),
+			reason: element.getAttribute('data-mpty-zen-reason')
+		});
 		element.classList.add(hiddenClass);
 		element.setAttribute('data-mpty-zen-reason', result.reason);
 		element.setAttribute('aria-hidden', 'true');
@@ -288,56 +298,6 @@
 		}
 	}
 
-	function scoreAction(action) {
-		if (!classifier || typeof classifier.actionEvidence !== 'function') {
-			return 0;
-		}
-
-		const href = (action.getAttribute && action.getAttribute('href')) || '';
-		return classifier.actionEvidence({
-			href: href,
-			label: normalizeText(action.textContent || action.value || (action.getAttribute && action.getAttribute('aria-label'))),
-			meta: normalizeText([
-				action.id || '',
-				typeof action.className === 'string' ? action.className : '',
-				action.getAttribute && action.getAttribute('data-action')
-			].join(' ')),
-			external: isExternalUrl(href)
-		});
-	}
-
-	function scanActionAncestors(scope) {
-		if (!scope || !scope.querySelectorAll) {
-			return;
-		}
-
-		for (const action of scope.querySelectorAll('a[href],button,input[type="button"],input[type="submit"]')) {
-			if (scoreAction(action) < 7) {
-				continue;
-			}
-
-			let current = action.parentElement;
-			for (let depth = 0; depth < 5 && current; depth++, current = current.parentElement) {
-				if (
-					current.id === 'wpbody-content' ||
-					current.classList.contains('wrap') ||
-					/^(HTML|BODY|FORM|TABLE|TBODY|THEAD|TR)$/.test(current.tagName)
-				) {
-					break;
-				}
-				if (current.matches('td,th,tr,.plugin-card,.plugin-install-php,.media-modal,[role="dialog"]')) {
-					break;
-				}
-
-				const result = classifyElement(current);
-				if (result && result.decision === 'suppress') {
-					suppress(current, result);
-					break;
-				}
-			}
-		}
-	}
-
 	function processNode(node) {
 		if (!node || node.nodeType !== 1) {
 			return;
@@ -347,10 +307,9 @@
 		}
 
 		scan(node);
-		scanActionAncestors(node);
 	}
 
-	function scheduleBatch() {
+	function scheduleBatch(deferToNextTask) {
 		if (batchScheduled) {
 			return;
 		}
@@ -358,14 +317,19 @@
 		batchScheduled = true;
 		const callback = function () {
 			batchScheduled = false;
-			const nodes = Array.from(pendingNodes);
-			pendingNodes.clear();
+			const nodes = Array.from(pendingNodes).slice(0, MAX_NODES_PER_BATCH);
 			for (const node of nodes) {
+				pendingNodes.delete(node);
 				processNode(node);
+			}
+			if (pendingNodes.size && !isRevealEnabled()) {
+				scheduleBatch(true);
 			}
 		};
 
-		if (typeof window.queueMicrotask === 'function') {
+		if (deferToNextTask) {
+			window.setTimeout(callback, 0);
+		} else if (typeof window.queueMicrotask === 'function') {
 			window.queueMicrotask(callback);
 		} else {
 			Promise.resolve().then(callback);
@@ -392,10 +356,30 @@
 
 	function restorePage() {
 		for (const element of document.querySelectorAll('.' + hiddenClass)) {
+			const state = suppressedState.get(element);
 			element.classList.remove(hiddenClass);
-			element.removeAttribute('aria-hidden');
-			element.removeAttribute('data-mpty-zen-reason');
-			element.style.removeProperty('display');
+			if (state) {
+				if (state.display) {
+					element.style.setProperty('display', state.display, state.displayPriority);
+				} else {
+					element.style.removeProperty('display');
+				}
+				if (state.hadAriaHidden) {
+					element.setAttribute('aria-hidden', state.ariaHidden);
+				} else {
+					element.removeAttribute('aria-hidden');
+				}
+				if (state.hadReason) {
+					element.setAttribute('data-mpty-zen-reason', state.reason);
+				} else {
+					element.removeAttribute('data-mpty-zen-reason');
+				}
+				suppressedState.delete(element);
+			} else {
+				element.removeAttribute('aria-hidden');
+				element.removeAttribute('data-mpty-zen-reason');
+				element.style.removeProperty('display');
+			}
 		}
 	}
 
@@ -403,6 +387,7 @@
 		if (observer) {
 			observer.disconnect();
 		}
+		pendingNodes.clear();
 		restorePage();
 	}
 
@@ -440,7 +425,6 @@
 		}
 
 		scan(document);
-		scanActionAncestors(document);
 		observe(document.getElementById('wpbody-content') || document.body, true);
 	}
 
