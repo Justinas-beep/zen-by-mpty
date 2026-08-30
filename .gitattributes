@@ -1,0 +1,20 @@
+* text=auto
+.gitattributes text eol=lf
+.gitignore     text eol=lf
+
+# Portable source, configuration, documentation, and shell scripts use LF.
+*.php  text eol=lf
+*.js   text eol=lf
+*.css  text eol=lf
+*.json text eol=lf
+*.xml  text eol=lf
+*.yml  text eol=lf
+*.yaml text eol=lf
+*.neon text eol=lf
+*.md   text eol=lf
+*.txt  text eol=lf
+*.lock text eol=lf
+*.sh   text eol=lf
+
+# Zen's PowerShell automation is Windows-oriented; keep its checkout form explicit.
+*.ps1 text eol=crlf

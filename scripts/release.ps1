@@ -7,6 +7,7 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
+$ReleaseError = $null
 $Repository = Split-Path -Parent $PSScriptRoot
 $BuildRoot = Join-Path $Repository 'build'
 $Archive = Join-Path $BuildRoot "zen-by-mpty-$Version.zip"
@@ -21,9 +22,12 @@ function Invoke-ZenReleaseStep {
     )
 
     Write-Host "[$Name]"
+    $global:LASTEXITCODE = 0
     & $Action
-    if ($LASTEXITCODE -ne 0) {
-        throw "$Name failed."
+    $StepSucceeded = $?
+    $StepExitCode = $LASTEXITCODE
+    if (-not $StepSucceeded -or $StepExitCode -ne 0) {
+        throw "$Name failed with exit code $StepExitCode. Release preflight stopped."
     }
 }
 
@@ -69,6 +73,13 @@ try {
     Write-Host "Zen $Version preflight passed. No publication was performed."
     Write-Host "Artifact: $Archive"
     Write-Host "SHA-256: $Actual"
+} catch {
+    $ReleaseError = $_
 } finally {
     Pop-Location
+}
+
+if ($null -ne $ReleaseError) {
+    [Console]::Error.WriteLine("Zen release preflight failed: $($ReleaseError.Exception.Message)")
+    exit 1
 }
