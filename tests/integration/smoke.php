@@ -34,7 +34,7 @@ mpty_zen_smoke_assert( 0 === strpos( $wp_version, MPTY_ZEN_EXPECTED_WP ), 'Unexp
 mpty_zen_smoke_assert( 0 === strpos( PHP_VERSION, MPTY_ZEN_EXPECTED_PHP ), 'Unexpected PHP compatibility version.' );
 mpty_zen_smoke_assert( is_plugin_active( 'zen-by-mpty/zen-by-mpty.php' ), 'Zen did not activate.' );
 mpty_zen_smoke_assert( class_exists( 'MPTY_Zen' ), 'Zen controller is unavailable after activation.' );
-mpty_zen_smoke_assert( '0.6.0' === MPTY_ZEN_VERSION, 'Unexpected Zen runtime version.' );
+mpty_zen_smoke_assert( '0.6.1' === MPTY_ZEN_VERSION, 'Unexpected Zen runtime version.' );
 
 wp_set_current_user( 1 );
 $zen = MPTY_Zen::instance();

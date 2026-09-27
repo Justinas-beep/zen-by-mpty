@@ -4,7 +4,7 @@ Tags: admin, notices, cleanup, productivity, dashboard
 Requires at least: 6.4
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.6.0
+Stable tag: 0.6.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -53,6 +53,9 @@ No. Zen does not load frontend scripts or styles and does not modify theme outpu
 No. Zen works locally and makes no remote requests.
 
 == Changelog ==
+
+= 0.6.1 =
+* Fixed Resume so promotional notices already restored by Pause are immediately reevaluated and hidden again when eligible.
 
 = 0.6.0 =
 * Added retained classifier and admin DOM regression coverage with false-positive safety as the priority.
@@ -107,5 +110,5 @@ No. Zen works locally and makes no remote requests.
 
 == Upgrade Notice ==
 
-= 0.6.0 =
-Zen now uses stricter false-positive protections and faithfully restores page display state when paused.
+= 0.6.1 =
+Resume now immediately reevaluates existing promotional content after Pause.

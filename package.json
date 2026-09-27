@@ -1,7 +1,7 @@
 {
   "name": "zen-by-mpty-development",
   "private": true,
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Development tests for Zen by MPTY",
   "scripts": {
     "test": "node --test tests/js/*.test.js"

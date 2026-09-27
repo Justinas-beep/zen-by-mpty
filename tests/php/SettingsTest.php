@@ -61,7 +61,7 @@ final class SettingsTest extends TestCase {
 		$this->assertSame( 1, $GLOBALS['mpty_zen_test_options']['mpty_zen_settings']['hide_promotional_ui'] );
 		$this->assertArrayNotHasKey( 'legacy_frontend_credit', $GLOBALS['mpty_zen_test_options']['mpty_zen_settings'] );
 		$this->assertArrayNotHasKey( 'qrooom_zen_settings', $GLOBALS['mpty_zen_test_options'] );
-		$this->assertSame( '0.6.0', $GLOBALS['mpty_zen_test_options']['mpty_zen_migration_050'] );
+		$this->assertSame( '0.6.1', $GLOBALS['mpty_zen_test_options']['mpty_zen_migration_050'] );
 	}
 
 	public function test_existing_canonical_settings_are_not_overwritten(): void {

@@ -6,7 +6,7 @@
  */
 
 define( 'ABSPATH', dirname( __DIR__, 2 ) . DIRECTORY_SEPARATOR );
-define( 'MPTY_ZEN_VERSION', '0.6.0' );
+define( 'MPTY_ZEN_VERSION', '0.6.1' );
 define( 'MPTY_ZEN_FILE', ABSPATH . 'zen-by-mpty.php' );
 
 /** Test option storage. */

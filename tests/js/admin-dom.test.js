@@ -25,6 +25,44 @@ function boot(markup) {
 	return dom;
 }
 
+function bootDuringParse(markup) {
+	const dom = new JSDOM('<!doctype html><html><body><main id="wpbody-content"></main><button id="mpty-zen-toggle-reveal"></button><p id="mpty-zen-reveal-help"></p></body></html>', {
+		runScripts: 'outside-only',
+		url: 'https://example.test/wp-admin/options-general.php'
+	});
+	dom.window.MPTYZen = {
+		settings: { enabled: true, hidePromotionalNotices: true, hideReviewNags: true, hidePromotionalUI: true },
+		revealKey: 'mpty_zen_test_reveal',
+		strings: {}
+	};
+	const NativeMutationObserver = dom.window.MutationObserver;
+	const observerStats = { active: 0, maximumActive: 0 };
+	dom.window.MutationObserver = class extends NativeMutationObserver {
+		observe(...args) {
+			if (!this.mptyZenActive) {
+				this.mptyZenActive = true;
+				observerStats.active++;
+				observerStats.maximumActive = Math.max(observerStats.maximumActive, observerStats.active);
+			}
+			return super.observe(...args);
+		}
+
+		disconnect() {
+			if (this.mptyZenActive) {
+				this.mptyZenActive = false;
+				observerStats.active--;
+			}
+			return super.disconnect();
+		}
+	};
+	dom.mptyZenObserverStats = observerStats;
+	dom.window.eval(classifierSource);
+	dom.window.eval(adminSource);
+	dom.window.document.getElementById('wpbody-content').insertAdjacentHTML('beforeend', markup);
+	dom.window.document.dispatchEvent(new dom.window.Event('DOMContentLoaded'));
+	return dom;
+}
+
 function toggle(dom) {
 	dom.window.document.getElementById('mpty-zen-toggle-reveal').click();
 }
@@ -67,6 +105,51 @@ test('multiple Pause and Resume cycles preserve the original display state', () 
 	assert.equal(promo.style.getPropertyValue('display'), 'none');
 	toggle(dom);
 	assert.equal(promo.style.cssText, 'display: grid !important;');
+	dom.window.close();
+});
+
+test('Resume immediately suppresses the same parser-time promotion across repeated cycles', async () => {
+	const dom = bootDuringParse('<div id="promo" class="notice promo-banner" style="display:flex !important" aria-hidden="false" data-mpty-zen-reason="original">Upgrade to Pro now</div>');
+	const promo = dom.window.document.getElementById('promo');
+	const button = dom.window.document.getElementById('mpty-zen-toggle-reveal');
+	const help = dom.window.document.getElementById('mpty-zen-reveal-help');
+	const zenWrap = dom.window.document.createElement('div');
+	zenWrap.className = 'mpty-zen-wrap';
+	dom.window.document.getElementById('wpbody-content').appendChild(zenWrap);
+
+	assert.equal(await waitFor(dom, () => promo.style.getPropertyValue('display') === 'none'), true);
+	zenWrap.appendChild(promo);
+	for (let cycle = 0; cycle < 2; cycle++) {
+		toggle(dom);
+		assert.equal(promo.style.getPropertyValue('display'), 'flex');
+		assert.equal(promo.style.getPropertyPriority('display'), 'important');
+		assert.equal(promo.getAttribute('aria-hidden'), 'false');
+		assert.equal(promo.getAttribute('data-mpty-zen-reason'), 'original');
+		assert.equal(button.getAttribute('aria-pressed'), 'true');
+		assert.equal(help.textContent, 'Zen is paused. Promotional content is currently visible.');
+
+		toggle(dom);
+		assert.equal(promo.style.getPropertyValue('display'), 'none');
+		assert.equal(promo.getAttribute('aria-hidden'), 'true');
+		assert.equal(promo.getAttribute('data-mpty-zen-reason'), 'promotion');
+		assert.equal(button.getAttribute('aria-pressed'), 'false');
+		assert.equal(help.textContent, 'Pause Zen to see everything plugins are displaying.');
+	}
+	assert.equal(dom.mptyZenObserverStats.active, 1);
+	assert.equal(dom.mptyZenObserverStats.maximumActive, 1);
+
+	const dynamicPromo = dom.window.document.createElement('div');
+	dynamicPromo.className = 'notice promo-banner';
+	dynamicPromo.textContent = 'Limited time special offer: upgrade now';
+	const dynamicLegitimate = dom.window.document.createElement('div');
+	dynamicLegitimate.className = 'notice notice-warning';
+	dynamicLegitimate.textContent = 'Payment failed. Review the operational record.';
+	dom.window.document.getElementById('wpbody-content').append(dynamicPromo, dynamicLegitimate);
+	assert.equal(await waitFor(dom, () => dynamicPromo.style.getPropertyValue('display') === 'none'), true);
+	assert.notEqual(dynamicLegitimate.style.getPropertyValue('display'), 'none');
+	assert.equal(dom.mptyZenObserverStats.active, 1);
+	assert.equal(dom.mptyZenObserverStats.maximumActive, 1);
+
 	dom.window.close();
 });
 

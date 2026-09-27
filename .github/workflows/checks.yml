@@ -81,13 +81,13 @@ jobs:
         run: php scripts/build-production.php build --source="$GITHUB_WORKSPACE" --output="$GITHUB_WORKSPACE/build"
 
       - name: Revalidate final ZIP
-        run: php scripts/build-production.php validate --source="$GITHUB_WORKSPACE" --zip="$GITHUB_WORKSPACE/build/zen-by-mpty-0.6.0.zip"
+        run: php scripts/build-production.php validate --source="$GITHUB_WORKSPACE" --zip="$GITHUB_WORKSPACE/build/zen-by-mpty-0.6.1.zip"
 
       - name: Show production contents and verify checksum
         run: |
           find build/zen-by-mpty -type f -print | sort
           cd build
-          sha256sum --check zen-by-mpty-0.6.0.zip.sha256
+          sha256sum --check zen-by-mpty-0.6.1.zip.sha256
 
       - name: Preserve validated artifact
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
@@ -95,8 +95,8 @@ jobs:
           name: zen-wordpress-org-artifact
           path: |
             build/zen-by-mpty
-            build/zen-by-mpty-0.6.0.zip
-            build/zen-by-mpty-0.6.0.zip.sha256
+            build/zen-by-mpty-0.6.1.zip
+            build/zen-by-mpty-0.6.1.zip.sha256
           if-no-files-found: error
           retention-days: 7
 
@@ -122,9 +122,9 @@ jobs:
 
       - name: Verify artifact after CI handoff
         run: |
-          php scripts/build-production.php validate --source="$GITHUB_WORKSPACE" --zip="$GITHUB_WORKSPACE/build/zen-by-mpty-0.6.0.zip"
+          php scripts/build-production.php validate --source="$GITHUB_WORKSPACE" --zip="$GITHUB_WORKSPACE/build/zen-by-mpty-0.6.1.zip"
           cd build
-          sha256sum --check zen-by-mpty-0.6.0.zip.sha256
+          sha256sum --check zen-by-mpty-0.6.1.zip.sha256
 
       - name: Run Plugin Check against production files
         uses: WordPress/plugin-check-action@10857da14b6c2246d15402b3e69f777edcf8c12e # v1

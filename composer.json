@@ -20,7 +20,7 @@
             "@php -l tests/integration/smoke.php"
         ],
         "build": "@php scripts/build-production.php build --source=. --output=build",
-        "validate-artifact": "@php scripts/build-production.php validate --source=. --zip=build/zen-by-mpty-0.6.0.zip",
+        "validate-artifact": "@php scripts/build-production.php validate --source=. --zip=build/zen-by-mpty-0.6.1.zip",
         "check": [
             "@syntax",
             "phpstan analyse --memory-limit=1G",

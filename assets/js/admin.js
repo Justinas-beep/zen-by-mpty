@@ -16,7 +16,6 @@
 	let observer = null;
 
 	const neverHideSelectors = [
-		'.mpty-zen-wrap',
 		'#wpadminbar',
 		'#adminmenu',
 		'#adminmenuback',
@@ -109,7 +108,13 @@
 			return true;
 		}
 
-		if (element.closest && element.closest('.mpty-zen-wrap,#wpadminbar,#adminmenuwrap,#screen-meta')) {
+		if (element.closest && element.closest('#wpadminbar,#adminmenuwrap,#screen-meta')) {
+			return true;
+		}
+
+		// WordPress moves admin notices into the page .wrap after parsing. Retain
+		// eligibility only for elements Zen already suppressed before that move.
+		if (element.closest && element.closest('.mpty-zen-wrap') && !suppressedState.has(element)) {
 			return true;
 		}
 
@@ -374,7 +379,6 @@
 				} else {
 					element.removeAttribute('data-mpty-zen-reason');
 				}
-				suppressedState.delete(element);
 			} else {
 				element.removeAttribute('aria-hidden');
 				element.removeAttribute('data-mpty-zen-reason');

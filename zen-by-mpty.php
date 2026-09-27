@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Zen by MPTY
  * Description: Creates a quieter WordPress admin by conservatively hiding promotional notices, review requests, upsells, and similar clutter.
- * Version: 0.6.0
+ * Version: 0.6.1
  * Author: MPTY Projects
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'MPTY_ZEN_VERSION', '0.6.0' );
+define( 'MPTY_ZEN_VERSION', '0.6.1' );
 define( 'MPTY_ZEN_FILE', __FILE__ );
 define( 'MPTY_ZEN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'MPTY_ZEN_URL', plugin_dir_url( __FILE__ ) );
