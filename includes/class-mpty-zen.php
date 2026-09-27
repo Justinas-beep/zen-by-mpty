@@ -27,26 +27,6 @@ final class MPTY_Zen {
 	private const OPTION_NAME = 'mpty_zen_settings';
 
 	/**
-	 * Legacy development option name.
-	 */
-	private const LEGACY_ZEN_OPTION_NAME = 'qrooom_zen_settings';
-
-	/**
-	 * Earlier Clean development option name.
-	 */
-	private const LEGACY_CLEAN_OPTION_NAME = 'qrooom_clean_settings';
-
-	/**
-	 * Previous Zen development migration marker.
-	 */
-	private const LEGACY_ZEN_MIGRATION_OPTION = 'qrooom_zen_migration_040';
-
-	/**
-	 * One-time migration marker.
-	 */
-	private const MIGRATION_OPTION = 'mpty_zen_migration_050';
-
-	/**
 	 * Get the singleton instance.
 	 *
 	 * @return MPTY_Zen
@@ -60,17 +40,9 @@ final class MPTY_Zen {
 	}
 
 	/**
-	 * Run activation tasks.
-	 */
-	public static function activate(): void {
-		self::maybe_migrate_legacy_settings();
-	}
-
-	/**
 	 * Register hooks.
 	 */
 	private function __construct() {
-		add_action( 'admin_init', array( __CLASS__, 'maybe_migrate_legacy_settings' ), 1 );
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
 		add_action( 'admin_menu', array( $this, 'register_settings_page' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
@@ -92,50 +64,6 @@ final class MPTY_Zen {
 			'hide_review_nags'          => 1,
 			'hide_promotional_ui'       => 1,
 		);
-	}
-
-	/**
-	 * Migrate development-era settings to the canonical MPTY namespace once.
-	 *
-	 * The old frontend-credit and safety-toggle settings are deliberately not
-	 * migrated because those capabilities are not part of Zen's product scope.
-	 */
-	public static function maybe_migrate_legacy_settings(): void {
-		if ( get_option( self::MIGRATION_OPTION, false ) ) {
-			return;
-		}
-
-		$current      = get_option( self::OPTION_NAME, null );
-		$legacy_zen   = get_option( self::LEGACY_ZEN_OPTION_NAME, null );
-		$legacy_clean = get_option( self::LEGACY_CLEAN_OPTION_NAME, null );
-
-		if ( ! is_array( $current ) ) {
-			$source = is_array( $legacy_zen ) ? $legacy_zen : $legacy_clean;
-
-			if ( is_array( $source ) ) {
-				$defaults = self::default_settings();
-				$migrated = array();
-
-				foreach ( $defaults as $key => $default ) {
-					$migrated[ $key ] = array_key_exists( $key, $source ) ? ( empty( $source[ $key ] ) ? 0 : 1 ) : $default;
-				}
-
-				add_option( self::OPTION_NAME, $migrated, '', false );
-				$current = get_option( self::OPTION_NAME, null );
-
-				// Never retire a legacy source unless the canonical MPTY option exists.
-				if ( ! is_array( $current ) ) {
-					return;
-				}
-			}
-		}
-
-		// Zen has not had a public release, so once canonical settings are safely
-		// present, retire development-era option keys instead of dual-reading forever.
-		delete_option( self::LEGACY_ZEN_OPTION_NAME );
-		delete_option( self::LEGACY_CLEAN_OPTION_NAME );
-		delete_option( self::LEGACY_ZEN_MIGRATION_OPTION );
-		add_option( self::MIGRATION_OPTION, MPTY_ZEN_VERSION, '', false );
 	}
 
 	/**

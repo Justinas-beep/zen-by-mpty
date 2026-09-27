@@ -69,7 +69,6 @@ No. Zen works locally and makes no remote requests.
 = 0.5.0 =
 * Renamed the previous development identity to Zen by MPTY and changed the developer identity to MPTY Projects.
 * Migrated PHP, JavaScript, DOM, asset, settings, build and package identifiers to the canonical MPTY identity.
-* Added a one-time settings migration from previous development settings to the canonical MPTY settings key.
 * Changed the plugin directory/text domain to zen-by-mpty before public distribution.
 
 = 0.4.4 =
@@ -97,7 +96,6 @@ No. Zen works locally and makes no remote requests.
 
 = 0.4.0 =
 * Renamed the earlier cleanup prototype to the previous Zen development identity.
-* Added one-time migration for compatible development-era Clean settings.
 * Removed all public-site/footer-credit functionality and frontend assets.
 * Made important-notice protection mandatory rather than user-disableable.
 * Split classifier scoring into a testable, dependency-free core module.

@@ -24,19 +24,6 @@ function get_option( $name, $default = false ) {
 	return array_key_exists( $name, $GLOBALS['mpty_zen_test_options'] ) ? $GLOBALS['mpty_zen_test_options'][ $name ] : $default;
 }
 
-function add_option( $name, $value ) {
-	if ( array_key_exists( $name, $GLOBALS['mpty_zen_test_options'] ) ) {
-		return false;
-	}
-	$GLOBALS['mpty_zen_test_options'][ $name ] = $value;
-	return true;
-}
-
-function delete_option( $name ) {
-	unset( $GLOBALS['mpty_zen_test_options'][ $name ] );
-	return true;
-}
-
 function wp_parse_args( $args, $defaults = array() ) {
 	return array_merge( $defaults, $args );
 }

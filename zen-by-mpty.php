@@ -24,6 +24,4 @@ define( 'MPTY_ZEN_URL', plugin_dir_url( __FILE__ ) );
 
 require_once MPTY_ZEN_DIR . 'includes/class-mpty-zen.php';
 
-register_activation_hook( MPTY_ZEN_FILE, array( 'MPTY_Zen', 'activate' ) );
-
 MPTY_Zen::instance();

@@ -10,4 +10,3 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 }
 
 delete_option( 'mpty_zen_settings' );
-delete_option( 'mpty_zen_migration_050' );

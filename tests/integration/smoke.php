@@ -69,6 +69,5 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 }
 require dirname( __DIR__, 2 ) . '/uninstall.php';
 mpty_zen_smoke_assert( false === get_option( 'mpty_zen_settings', false ), 'Uninstall did not remove Zen settings.' );
-mpty_zen_smoke_assert( false === get_option( 'mpty_zen_migration_050', false ), 'Uninstall did not remove Zen migration state.' );
 
 fwrite( STDOUT, 'Zen compatibility smoke test passed.' . PHP_EOL );

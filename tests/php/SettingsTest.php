@@ -1,6 +1,6 @@
 <?php
 /**
- * Settings and migration regression coverage.
+ * Settings regression coverage.
  *
  * @package MPTYZen
  */
@@ -45,32 +45,5 @@ final class SettingsTest extends TestCase {
 			),
 			MPTY_Zen::instance()->get_settings()
 		);
-	}
-
-	public function test_legacy_settings_migrate_once_and_drop_unknown_keys(): void {
-		$GLOBALS['mpty_zen_test_options']['qrooom_zen_settings'] = array(
-			'enabled'                   => 0,
-			'hide_promotional_notices' => 1,
-			'hide_review_nags'          => 0,
-			'legacy_frontend_credit'    => 1,
-		);
-
-		MPTY_Zen::maybe_migrate_legacy_settings();
-
-		$this->assertSame( 0, $GLOBALS['mpty_zen_test_options']['mpty_zen_settings']['enabled'] );
-		$this->assertSame( 1, $GLOBALS['mpty_zen_test_options']['mpty_zen_settings']['hide_promotional_ui'] );
-		$this->assertArrayNotHasKey( 'legacy_frontend_credit', $GLOBALS['mpty_zen_test_options']['mpty_zen_settings'] );
-		$this->assertArrayNotHasKey( 'qrooom_zen_settings', $GLOBALS['mpty_zen_test_options'] );
-		$this->assertSame( '0.6.1', $GLOBALS['mpty_zen_test_options']['mpty_zen_migration_050'] );
-	}
-
-	public function test_existing_canonical_settings_are_not_overwritten(): void {
-		$canonical = array( 'enabled' => 0 );
-		$GLOBALS['mpty_zen_test_options']['mpty_zen_settings'] = $canonical;
-		$GLOBALS['mpty_zen_test_options']['qrooom_zen_settings'] = array( 'enabled' => 1 );
-
-		MPTY_Zen::maybe_migrate_legacy_settings();
-
-		$this->assertSame( $canonical, $GLOBALS['mpty_zen_test_options']['mpty_zen_settings'] );
 	}
 }
