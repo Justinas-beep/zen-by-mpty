@@ -7,7 +7,7 @@
     "test": "node --test tests/js/*.test.js"
   },
   "devDependencies": {
-    "@wordpress/env": "11.14.0",
+    "@wordpress/env": "11.16.0",
     "jsdom": "26.1.0"
   },
   "engines": {
