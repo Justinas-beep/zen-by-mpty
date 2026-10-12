@@ -31,7 +31,7 @@ Complete this checklist against the exact commit and ZIP intended for release. A
 - [ ] The MPTY tools section appears only on Zen's settings page, reports local installed state, and performs no remote request or automatic action.
 - [ ] Keyboard operation, labels, focus, control state, status announcements, escaping, and translated strings are reviewed.
 
-### Manual browser matrix — human verification required
+### Manual browser matrix - human verification required
 
 Leave every row pending until a human performs it in the stated environment. For each row verify: obvious promotions hide; operational notices remain; functional panels remain; Pause restores correctly; layout remains intact; Zen causes no console errors or obvious sluggishness.
 
@@ -57,6 +57,23 @@ Leave every row pending until a human performs it in the stated environment. For
 - [ ] Migration, uninstall, and downgrade behavior is reviewed against supported prior versions.
 - [ ] PHP 7.4 and WordPress 6.4 minimum compatibility receive executable evidence; current supported WordPress is smoke-tested.
 
+## WordPress.org distribution compliance
+
+- [ ] The exact proposed ZIP is identified by distribution channel, commit, production manifest, filename, SHA-256, reviewer, review date, and the current official WordPress.org guidance used.
+- [ ] A named reviewer explicitly approves WordPress.org compliance for that exact ZIP. This approval is separate from Plugin Check, green CI, and general release qualification.
+- [ ] Zen is complete and operational as a standalone Free plugin; no bundled behavior is locked by payment, license, trial, quota, usage limit, or remote entitlement.
+- [ ] Every distributed file and asset is GPL-compatible, its provenance is known, and all required copyright, license, and attribution notices are present.
+- [ ] Distributed source is human-readable. Any generated, minified, or bundled material has matching public source and reproducible build instructions disclosed in the readme.
+- [ ] WordPress-provided libraries and components are reused where appropriate; bundled dependencies are necessary, maintained, securely versioned, license-compatible, and reviewed with their transitive production footprint.
+- [ ] External calls, collected or transmitted data, consent, privacy disclosures, public credits, and attribution links are necessary, accurate, and permitted. No executable code is delivered remotely and no prohibited custom updater is present.
+- [ ] Plugin name, slug, author identity, trademarks, third-party names, screenshots, and public claims are authorized and accurate.
+- [ ] A code release increments the version and changelog. Plugin header, runtime version, package metadata where applicable, `readme.txt` Stable Tag/changelog, SVN tag, ZIP filename, and release metadata agree; any readme-only update is clearly distinguished.
+- [ ] WordPress.org contributor identities and slug access are current, authorized, and limited to maintainers who need them.
+- [ ] The SVN release places plugin files directly in `trunk/` and the matching `tags/X.Y.Z/`, not inside a ZIP or an extra `zen-by-mpty/` directory; development-only files remain excluded.
+- [ ] Maintainer email and WordPress.org review correspondence are actively monitored; maintainers use individual accounts with 2FA and do not share WordPress.org or SVN credentials.
+- [ ] WordPress.org release confirmation is completed when that directory feature is enabled, and the published listing, files, Stable Tag, and version are checked afterward.
+- [ ] If future commercial behavior or a substantive external service is proposed, its pre-implementation distribution review is approved before code is added. This item does not create a Free/Pro architecture for current Zen.
+
 ## Production artifact
 
 - [ ] The authoritative production manifest is exact and validation rejects missing or unexpected files.
@@ -73,6 +90,7 @@ Leave every row pending until a human performs it in the stated environment. For
 - [ ] The approved tag/release assets match the validated commit and checksum.
 - [ ] A post-release smoke test is recorded.
 - [ ] Unresolved risks have severity, mitigation, owner, and follow-up.
+- [ ] The exact publication baseline is unambiguous. The tagged 0.6.1 artifact and any newer local UI work are not mixed; retained newer work is separately versioned and qualified as a later candidate.
 
 Final verdict (select one):
 

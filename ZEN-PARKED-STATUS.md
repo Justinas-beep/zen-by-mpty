@@ -1,4 +1,6 @@
-# Zen by MPTY — Parked Status and Restart Manual
+# Zen by MPTY - Parked Status and Restart Manual
+
+> **Governance checkpoint - 2026-10-12:** The repository contains tag `v0.6.1` at commit `90b04b955fea5cabb28d596d54dd6198da67ac70`, and GitHub Release `v0.6.1` contains the previously qualified six-file ZIP with SHA-256 `284979f01968c705fa253b72b0cdba6e24c7d1acbcccb80655c02adcbc266975`. The current `develop` working tree also contains newer, uncommitted UI/source/manifest/test work, so it is not the same candidate as that tagged ZIP. WordPress.org publication must choose one exact baseline: preserve and separately approve the tagged 0.6.1 ZIP, or retain the newer work as a later versioned candidate and fully qualify a new exact artifact. This milestone makes no publication decision and does not regenerate an artifact. WordPress.org publication status, slug/account authorization, naming and trademark confirmation, contributor access, 2FA, monitored review correspondence, and exact-ZIP compliance approval remain unverified. This checkpoint supersedes older statements below that describe 0.6.1 as untagged, unpublished on GitHub, or the working tree as clean.
 
 > **IF YOU ARE RESUMING ZEN:**
 > 1. Read this document.
@@ -13,19 +15,19 @@
 |---|---|
 | Product | Zen by MPTY |
 | Qualified candidate | 0.6.1 |
-| Status | **RELEASE-QUALIFIED / NOT YET PUBLISHED** |
+| Status | **0.6.1 PUBLISHED ON GITHUB / WORDPRESS.ORG STATUS UNVERIFIED** |
 | Branch | `develop` |
-| Candidate commit | Current clean, synchronized `develop` HEAD containing this handoff |
-| Previous public release | 0.6.0, tag `v0.6.0` |
-| Final CI | PASS — latest successful GitHub Actions run for the candidate `develop` HEAD |
+| Candidate commit | Tagged 0.6.1 artifact: `90b04b955fea5cabb28d596d54dd6198da67ac70`; newer work is not yet a release candidate |
+| GitHub release | 0.6.1, tag `v0.6.1` |
+| Final CI | PASS - latest successful GitHub Actions run for the candidate `develop` HEAD |
 | Repository | <https://github.com/Justinas-beep/zen-by-mpty> |
 
-The 0.6.1 candidate includes the accepted removal of a never-public development-era settings migration, its marker handling, and its dedicated tests and documentation. Current Zen settings, classifier behavior, Pause/Resume behavior, and the production manifest are otherwise unchanged. The authoritative commit is the clean, synchronized `develop` HEAD that contains this document; always resolve and verify its exact SHA from Git rather than relying on a self-referential hash embedded here. There is no known release blocker. No 0.6.1 merge to `main`, tag, GitHub Release, WordPress.org upload, or other publication has been performed.
+The qualified 0.6.1 artifact includes the accepted removal of a never-public development-era settings migration, its marker handling, and its dedicated tests and documentation. It is anchored to tag `v0.6.1`, commit `90b04b955fea5cabb28d596d54dd6198da67ac70`, and the checksum above. Its GitHub Release is published. WordPress.org publication and exact-artifact compliance approval have not been established by this repository review.
 
 The distinction is deliberate:
 
-- **0.6.0 is publicly released.** `main` and tag `v0.6.0` currently resolve to `bf8771b`.
-- **0.6.1 is a release-qualified corrective candidate and remains unpublished.**
+- **0.6.0 was the previous GitHub release.** Tag `v0.6.0` resolves to `bf8771b`.
+- **0.6.1 is the current GitHub release.** Its WordPress.org publication status remains unverified.
 
 ## 2. Product definition
 
@@ -56,12 +58,12 @@ These are shipped capabilities. Optional work listed later is not.
 
 Zen intentionally uses a small WordPress-native architecture rather than a framework:
 
-- `zen-by-mpty.php` — plugin header, constants, controller loading, and bootstrap.
-- `includes/class-mpty-zen.php` — final `MPTY_Zen` admin controller, hooks, settings, assets, page rendering, and local product-state detection.
-- `assets/js/classifier.js` — dependency-free classification policy and scoring.
-- `assets/js/admin.js` — DOM feature collection, suppression/restoration, Pause/Resume, diagnostics, batching, and observation.
-- `uninstall.php` — canonical owned-data cleanup.
-- `scripts/production-manifest.php` and `scripts/build-production.php` — exact production boundary, deterministic build, and validation.
+- `zen-by-mpty.php` - plugin header, constants, controller loading, and bootstrap.
+- `includes/class-mpty-zen.php` - final `MPTY_Zen` admin controller, hooks, settings, assets, page rendering, and local product-state detection.
+- `assets/js/classifier.js` - dependency-free classification policy and scoring.
+- `assets/js/admin.js` - DOM feature collection, suppression/restoration, Pause/Resume, diagnostics, batching, and observation.
+- `uninstall.php` - canonical owned-data cleanup.
+- `scripts/production-manifest.php` and `scripts/build-production.php` - exact production boundary, deterministic build, and validation.
 
 The important separation is:
 
@@ -185,9 +187,9 @@ GitHub Actions independently runs source/static checks, PHP 7.4 production synta
 
 The exact 0.6.0 ZIP was used for retroactive LocalWP qualification. The Pause/Resume defect was reproduced from that artifact.
 
-### Qualified, unpublished candidate 0.6.1
+### Qualified GitHub release 0.6.1
 
-- Reconstruction anchor: current clean, synchronized `develop` HEAD containing this handoff
+- Artifact anchor: tag `v0.6.1` at commit `90b04b955fea5cabb28d596d54dd6198da67ac70`
 - Current local ZIP: `C:\Users\lapej\Desktop\MPTY projects\Zen\plugin\zen-by-mpty\build\zen-by-mpty-0.6.1.zip`
 - SHA-256: `284979f01968c705fa253b72b0cdba6e24c7d1acbcccb80655c02adcbc266975`
 - File count: 6 files beneath one `zen-by-mpty/` directory.
@@ -235,7 +237,7 @@ Correction: suppression state survives Pause, and previously suppressed content 
 
 ## 19. Final qualification evidence
 
-Qualified candidate: current clean, synchronized `develop` HEAD containing this handoff.
+Qualified artifact: tag `v0.6.1` at commit `90b04b955fea5cabb28d596d54dd6198da67ac70`.
 
 Final GitHub Actions evidence: the latest successful checks run for the candidate `develop` HEAD in <https://github.com/Justinas-beep/zen-by-mpty/actions>.
 
@@ -328,13 +330,13 @@ The following items are deliberately deferred and do not block publishing 0.6.1:
 
 **Zen 0.6.0 is publicly released.**
 
-**Zen 0.6.1 is a release-qualified corrective candidate and is not yet published.** It has not been merged to `main`, tagged as `v0.6.1`, published as a GitHub Release, uploaded to WordPress.org, or otherwise distributed as the replacement public release.
+**Zen 0.6.1 is qualified and published as a GitHub Release.** WordPress.org publication status and exact-ZIP compliance approval remain unverified. Newer local UI work is a separate potential later candidate and must not be mixed with the tagged 0.6.1 artifact.
 
 There is no known product release blocker. Do not reopen product development or qualification without a concrete new reason. Resume from:
 
 **publication decision → final source/artifact identity confirmation → fail-safe promotion/tag/publication under `RELEASE-PROCESS.md`.**
 
-If runtime source or artifact content changes after the clean, synchronized candidate `develop` HEAD, reconsider the relevant qualification before publication.
+If runtime source or artifact content differs from tagged commit `90b04b955fea5cabb28d596d54dd6198da67ac70`, treat it as a later candidate and repeat the relevant qualification before publication.
 
 ## 25. STARTING A NEW CHAT
 
@@ -350,8 +352,8 @@ Treat the repository and code as authoritative. Important anchors:
 - Repository: C:\Users\lapej\Desktop\MPTY projects\Zen\plugin\zen-by-mpty
 - GitHub: https://github.com/Justinas-beep/zen-by-mpty
 - 0.6.0 is publicly released; tag v0.6.0.
-- 0.6.1 is release-qualified but unpublished.
-- Qualified candidate commit: resolve the clean, synchronized develop HEAD containing this handoff.
+- 0.6.1 is release-qualified and published on GitHub; WordPress.org publication status is unverified.
+- Qualified artifact commit: 90b04b955fea5cabb28d596d54dd6198da67ac70.
 - Qualified ZIP SHA-256: 284979f01968c705fa253b72b0cdba6e24c7d1acbcccb80655c02adcbc266975
 - Final CI: latest successful checks run for that exact develop commit.
 - Zen is site-scoped for this release.
@@ -368,7 +370,7 @@ Before advising publication, verify develop/HEAD/status and the candidate anchor
 Copy and paste this into a new Codex task:
 
 ```text
-ZEN BY MPTY — FACTUAL PARKED-STATE RESUME CHECK
+ZEN BY MPTY - FACTUAL PARKED-STATE RESUME CHECK
 
 Repository:
 C:\Users\lapej\Desktop\MPTY projects\Zen\plugin\zen-by-mpty
@@ -378,7 +380,7 @@ Read ZEN-PARKED-STATUS.md first, then inspect the current branch, status, HEAD, 
 Qualified anchor:
 - branch: develop
 - candidate: 0.6.1
-- commit: resolve the clean, synchronized develop HEAD containing this handoff
+- commit: 90b04b955fea5cabb28d596d54dd6198da67ac70
 - ZIP SHA-256: 284979f01968c705fa253b72b0cdba6e24c7d1acbcccb80655c02adcbc266975
 - final CI: latest successful checks run for that exact develop commit
 
