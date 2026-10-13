@@ -4,7 +4,7 @@ Tags: admin, notices, cleanup, productivity, dashboard
 Requires at least: 6.4
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.6.1
+Stable tag: 0.7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -53,6 +53,11 @@ No. Zen does not load frontend scripts or styles and does not modify theme outpu
 No. Zen works locally and makes no remote requests.
 
 == Changelog ==
+
+= 0.7.0 =
+* Refreshed the settings screen with the shared MPTY product header and clearer section hierarchy.
+* Improved Active, Paused and Inactive state presentation while preserving existing Pause and Resume behavior.
+* Improved responsive settings controls, keyboard focus and high-contrast support.
 
 = 0.6.1 =
 * Fixed Resume so promotional notices already restored by Pause are immediately reevaluated and hidden again when eligible.
@@ -108,5 +113,5 @@ No. Zen works locally and makes no remote requests.
 
 == Upgrade Notice ==
 
-= 0.6.1 =
-Resume now immediately reevaluates existing promotional content after Pause.
+= 0.7.0 =
+Refreshes Zen's settings experience while preserving its local, conservative suppression behavior.

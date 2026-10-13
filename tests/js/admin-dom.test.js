@@ -10,7 +10,7 @@ const classifierSource = fs.readFileSync(path.join(__dirname, '../../assets/js/c
 const adminSource = fs.readFileSync(path.join(__dirname, '../../assets/js/admin.js'), 'utf8');
 
 function boot(markup) {
-	const dom = new JSDOM(`<!doctype html><html><body><main id="wpbody-content">${markup}</main><button id="mpty-zen-toggle-reveal"></button><p id="mpty-zen-reveal-help"></p></body></html>`, {
+	const dom = new JSDOM(`<!doctype html><html><body><main id="wpbody-content">${markup}</main><span id="mpty-zen-status"></span><section id="mpty-zen-pause-panel"><button id="mpty-zen-toggle-reveal"></button><p id="mpty-zen-reveal-help"></p></section></body></html>`, {
 		runScripts: 'outside-only',
 		url: 'https://example.test/wp-admin/options-general.php'
 	});
@@ -26,7 +26,7 @@ function boot(markup) {
 }
 
 function bootDuringParse(markup) {
-	const dom = new JSDOM('<!doctype html><html><body><main id="wpbody-content"></main><button id="mpty-zen-toggle-reveal"></button><p id="mpty-zen-reveal-help"></p></body></html>', {
+	const dom = new JSDOM('<!doctype html><html><body><main id="wpbody-content"></main><span id="mpty-zen-status"></span><section id="mpty-zen-pause-panel"><button id="mpty-zen-toggle-reveal"></button><p id="mpty-zen-reveal-help"></p></section></body></html>', {
 		runScripts: 'outside-only',
 		url: 'https://example.test/wp-admin/options-general.php'
 	});
@@ -105,6 +105,23 @@ test('multiple Pause and Resume cycles preserve the original display state', () 
 	assert.equal(promo.style.getPropertyValue('display'), 'none');
 	toggle(dom);
 	assert.equal(promo.style.cssText, 'display: grid !important;');
+	dom.window.close();
+});
+
+test('Pause and Resume keep the visible operating status in sync', () => {
+	const dom = boot('');
+	const status = dom.window.document.getElementById('mpty-zen-status');
+	const pausePanel = dom.window.document.getElementById('mpty-zen-pause-panel');
+	assert.equal(status.textContent, 'Active');
+	assert.equal(status.classList.contains('mpty-ui__badge--good'), true);
+	assert.equal(pausePanel.classList.contains('mpty-ui__panel--attention'), false);
+	toggle(dom);
+	assert.equal(status.textContent, 'Paused');
+	assert.equal(status.classList.contains('mpty-ui__badge--attention'), true);
+	assert.equal(pausePanel.classList.contains('mpty-ui__panel--attention'), true);
+	toggle(dom);
+	assert.equal(status.textContent, 'Active');
+	assert.equal(pausePanel.classList.contains('mpty-ui__panel--attention'), false);
 	dom.window.close();
 });
 

@@ -1,5 +1,7 @@
 # Zen by MPTY - Parked Status and Restart Manual
 
+> **0.7.0 qualification checkpoint - 2026-10-13:** The accepted settings-screen refresh is versioned as 0.7.0 and remains behavior-preserving. Local5 accepted the actual seven-file ZIP from `build/0.7.0/zen-by-mpty-0.7.0.zip`, SHA-256 `9d8c39044db4fb0a4be9c5030cd1763ec3cce3d1c86c1aba8209db9e16454a79`. Installation used an ordinary directory and every installed file matched the ZIP. Activation, settings persistence, Active/Paused/Inactive states, repeated Pause/Resume, live suppression and restoration of the same eligible WordPress notice, conservative handling of legitimate Sign and Plugins screens, uninstall cleanup, and exact reinstallation passed. Desktop 1440px, tablet 768px, mobile 390px, keyboard, visible focus, status text, `aria-pressed`, and browser-console checks passed without Zen-caused overflow or errors. True browser 200% zoom remains **NOT VERIFIED** because the available browser automation did not expose or change browser zoom; viewport reflow is verified but is not a substitute. Sign Free remained active, Sign Pro remained inactive, and the before/after hashes for both Sign plugin trees, all `kpc_` options, and all 18 Sign-owned tables matched exactly. This ZIP is still derived from the pre-commit working tree. A commit-anchored CI artifact, independent GitHub Actions, and Plugin Check remain required before 0.7.0 can be called release-qualified. Do not merge, tag, submit, publish, or deploy from this checkpoint.
+
 > **Governance checkpoint - 2026-10-12:** The repository contains tag `v0.6.1` at commit `90b04b955fea5cabb28d596d54dd6198da67ac70`, and GitHub Release `v0.6.1` contains the previously qualified six-file ZIP with SHA-256 `284979f01968c705fa253b72b0cdba6e24c7d1acbcccb80655c02adcbc266975`. The current `develop` working tree also contains newer, uncommitted UI/source/manifest/test work, so it is not the same candidate as that tagged ZIP. WordPress.org publication must choose one exact baseline: preserve and separately approve the tagged 0.6.1 ZIP, or retain the newer work as a later versioned candidate and fully qualify a new exact artifact. This milestone makes no publication decision and does not regenerate an artifact. WordPress.org publication status, slug/account authorization, naming and trademark confirmation, contributor access, 2FA, monitored review correspondence, and exact-ZIP compliance approval remain unverified. This checkpoint supersedes older statements below that describe 0.6.1 as untagged, unpublished on GitHub, or the working tree as clean.
 
 > **IF YOU ARE RESUMING ZEN:**
@@ -14,12 +16,12 @@
 | Item | Authoritative parked state |
 |---|---|
 | Product | Zen by MPTY |
-| Qualified candidate | 0.6.1 |
-| Status | **0.6.1 PUBLISHED ON GITHUB / WORDPRESS.ORG STATUS UNVERIFIED** |
+| Candidate under qualification | 0.7.0 |
+| Status | **0.7.0 LOCAL QUALIFICATION COMPLETE EXCEPT TRUE 200% ZOOM / COMMIT AND CI PENDING** |
 | Branch | `develop` |
-| Candidate commit | Tagged 0.6.1 artifact: `90b04b955fea5cabb28d596d54dd6198da67ac70`; newer work is not yet a release candidate |
+| Candidate commit | Not established until the bounded 0.7.0 diff is committed; 0.6.1 remains tagged at `90b04b955fea5cabb28d596d54dd6198da67ac70` |
 | GitHub release | 0.6.1, tag `v0.6.1` |
-| Final CI | PASS - latest successful GitHub Actions run for the candidate `develop` HEAD |
+| 0.7.0 CI | Pending the candidate commit; do not infer it from 0.6.1 CI |
 | Repository | <https://github.com/Justinas-beep/zen-by-mpty> |
 
 The qualified 0.6.1 artifact includes the accepted removal of a never-public development-era settings migration, its marker handling, and its dedicated tests and documentation. It is anchored to tag `v0.6.1`, commit `90b04b955fea5cabb28d596d54dd6198da67ac70`, and the checksum above. Its GitHub Release is published. WordPress.org publication and exact-artifact compliance approval have not been established by this repository review.

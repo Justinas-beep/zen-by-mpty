@@ -435,17 +435,33 @@
 	function updateRevealControls() {
 		const button = document.getElementById('mpty-zen-toggle-reveal');
 		const help = document.getElementById('mpty-zen-reveal-help');
+		const status = document.getElementById('mpty-zen-status');
+		const pausePanel = document.getElementById('mpty-zen-pause-panel');
 		const revealed = isRevealEnabled();
+		const strings = boot.strings || {};
+
+		if (status) {
+			status.classList.toggle('mpty-ui__badge--good', Boolean(settings.enabled && !revealed));
+			status.classList.toggle('mpty-ui__badge--attention', Boolean(settings.enabled && revealed));
+			status.textContent = settings.enabled
+				? (revealed ? (strings.paused || 'Paused') : (strings.active || 'Active'))
+				: (strings.inactive || 'Inactive');
+		}
+
+		if (pausePanel) {
+			pausePanel.classList.toggle('mpty-ui__panel--attention', Boolean(settings.enabled && revealed));
+			pausePanel.classList.toggle('mpty-ui__panel--inactive', !settings.enabled);
+		}
 
 		if (button) {
 			button.setAttribute('aria-pressed', revealed ? 'true' : 'false');
-			button.textContent = revealed ? ((boot.strings && boot.strings.resume) || 'Resume Zen') : ((boot.strings && boot.strings.pause) || 'Pause Zen');
+			button.textContent = revealed ? (strings.resume || 'Resume Zen') : (strings.pause || 'Pause Zen');
 		}
 
 		if (help) {
-			help.textContent = revealed
-				? ((boot.strings && boot.strings.pausedHelp) || 'Zen is paused. Promotional content is currently visible.')
-				: ((boot.strings && boot.strings.activeHelp) || 'Pause Zen to see everything plugins are displaying.');
+			help.textContent = settings.enabled
+				? (revealed ? (strings.pausedHelp || 'Zen is paused. Promotional content is currently visible.') : (strings.activeHelp || 'Pause Zen to see everything plugins are displaying.'))
+				: (strings.inactiveHelp || 'Enable Zen and save your settings to begin hiding promotional clutter.');
 		}
 	}
 

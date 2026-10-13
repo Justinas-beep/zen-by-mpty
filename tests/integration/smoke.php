@@ -34,7 +34,7 @@ mpty_zen_smoke_assert( 0 === strpos( $wp_version, MPTY_ZEN_EXPECTED_WP ), 'Unexp
 mpty_zen_smoke_assert( 0 === strpos( PHP_VERSION, MPTY_ZEN_EXPECTED_PHP ), 'Unexpected PHP compatibility version.' );
 mpty_zen_smoke_assert( is_plugin_active( 'zen-by-mpty/zen-by-mpty.php' ), 'Zen did not activate.' );
 mpty_zen_smoke_assert( class_exists( 'MPTY_Zen' ), 'Zen controller is unavailable after activation.' );
-mpty_zen_smoke_assert( '0.6.1' === MPTY_ZEN_VERSION, 'Unexpected Zen runtime version.' );
+mpty_zen_smoke_assert( '0.7.0' === MPTY_ZEN_VERSION, 'Unexpected Zen runtime version.' );
 
 wp_set_current_user( 1 );
 $zen = MPTY_Zen::instance();
@@ -63,6 +63,10 @@ $zen->render_settings_page();
 $settings_html = ob_get_clean();
 mpty_zen_smoke_assert( is_string( $settings_html ) && false !== strpos( $settings_html, 'mpty-zen-toggle-reveal' ), 'Settings page did not render.' );
 mpty_zen_smoke_assert( false !== strpos( $settings_html, 'Other MPTY tools' ), 'MPTY tools section did not render inside Zen settings.' );
+mpty_zen_smoke_assert( false !== strpos( $settings_html, 'mpty-ui__panel' ), 'MPTY settings panels did not render.' );
+mpty_zen_smoke_assert( false !== strpos( $settings_html, 'mpty-zen-status' ), 'Zen status did not render.' );
+mpty_zen_smoke_assert( false !== strpos( $settings_html, 'mpty-ui__product-icon' ), 'Zen product icon did not render.' );
+mpty_zen_smoke_assert( false !== strpos( $settings_html, 'mpty-ui__product-icon-box' ), 'Zen product icon box did not render.' );
 
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	define( 'WP_UNINSTALL_PLUGIN', 'zen-by-mpty/zen-by-mpty.php' );

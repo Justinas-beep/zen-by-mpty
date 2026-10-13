@@ -14,6 +14,7 @@ final class ProductionManifestTest extends TestCase {
 
 		$this->assertSame(
 			array(
+				'assets/css/admin.css',
 				'assets/js/admin.js',
 				'assets/js/classifier.js',
 				'includes/class-mpty-zen.php',
