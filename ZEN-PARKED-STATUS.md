@@ -1,5 +1,7 @@
 # Zen by MPTY - Parked Status and Restart Manual
 
+> **0.7.0 final WordPress.org technical review - 2026-10-25:** Reviewer: Codex, acting as the repository and exact-artifact technical reviewer. Source is clean and synchronized `develop` at `350a649fba46f9c4ab33b1fe0c724f9062330c5c`. The canonical CI artifact was downloaded from the successful rerun of GitHub Actions run `38447802812`, not rebuilt locally: `zen-by-mpty-0.7.0.zip`, 17,527 bytes, SHA-256 `506656aec8095f65e1bccf1900a754fa05013dd1dec86256a2cdab8f7a149117`. Its seven-file payload passed exact-manifest validation and matched the ordinary Local5 installation byte-for-byte. The rerun passed source checks, WordPress 6.4 / PHP 7.4, current WordPress / PHP 8.4, production syntax, artifact handoff, and Plugin Check. A separate exact-ZIP review against the current official WordPress.org Detailed Plugin Guidelines (<https://developer.wordpress.org/plugins/wordpress-org/detailed-plugin-guidelines/>) and SVN release guidance (<https://developer.wordpress.org/plugins/wordpress-org/how-to-use-subversion/>) found no GPL, readable-source, locked-feature, external-call, updater, privacy, dependency, metadata, or package-boundary blocker. Local5 ran WordPress 7.1.3 on PHP 8.5.12. Temporary activation, unchanged settings save, Active/Paused/Inactive states, mouse and Space-key Pause/Resume, visible keyboard focus, legitimate core dashboard content, 1440/1024/768/390px layouts, no horizontal overflow, and a clean browser console passed; Zen was returned to its prior inactive state. The previously accepted exact-artifact classifier, live promotional-suppression, restoration, dynamic-content, uninstall, and reinstallation evidence remains applicable because source and artifact identity did not change. True numeric 100%/200% browser zoom remains **NOT VERIFIED** because the available browser surface exposes viewport control but no numeric zoom control. WordPress.org account ownership, slug approval/access, naming and trademark authority, contributor access, maintainer contact monitoring, and individual-account 2FA remain owner confirmations. Search found no existing public `zen-by-mpty` directory listing, but only WordPress.org can approve and assign the slug. These owner prerequisites and the true 200% zoom check make submission readiness conditional; they do not identify a package defect. Do not tag, publish, submit, or deploy without explicit owner authorization.
+
 > **0.7.0 qualification checkpoint - 2026-10-13:** The accepted settings-screen refresh is versioned as 0.7.0 and remains behavior-preserving. The bounded candidate was committed at `18518127f5ef69e798b0609d42821a30faddcbf6`. GitHub Actions run `38447172638` passed source checks on PHP 8.2 and 8.4, PHP 7.4 production syntax, WordPress 6.4 / PHP 7.4 and current WordPress / PHP 8.4 compatibility, deterministic artifact validation, artifact handoff, and Plugin Check. The canonical seven-file CI ZIP is `zen-by-mpty-0.7.0.zip`, SHA-256 `506656aec8095f65e1bccf1900a754fa05013dd1dec86256a2cdab8f7a149117`. Its payload matched the locally accepted ZIP byte-for-byte; the archive hashes differed only at the ZIP-container level. The exact canonical CI ZIP was then installed into an ordinary Local5 plugin directory and passed activation, live promotional-notice suppression, Pause restoration, immediate Resume re-suppression, state/ARIA, and console smoke. The broader local candidate acceptance also passed settings persistence, Active/Paused/Inactive states, repeated Pause/Resume, legitimate Sign and Plugins screens, uninstall cleanup, exact reinstallation, desktop 1440px, tablet 768px, mobile 390px, keyboard, visible focus, status text, and `aria-pressed`, with no Zen-caused overflow or browser errors. True browser 200% zoom remains **NOT VERIFIED** because the available browser automation did not expose or change browser zoom; viewport reflow is verified but is not a substitute. Sign Free remained active, Sign Pro remained inactive, and the before/after hashes for both Sign plugin trees, all `kpc_` options, and all 18 Sign-owned tables matched exactly. WordPress.org account/slug authorization, naming and trademark confirmation, contributor access, 2FA, monitored review correspondence, exact-ZIP human compliance approval, true 200% zoom, and any unchecked human release-checklist rows remain explicit owner-side or manual prerequisites. Do not merge, tag, submit, publish, or deploy from this checkpoint.
 
 > **Governance checkpoint - 2026-10-12:** The repository contains tag `v0.6.1` at commit `90b04b955fea5cabb28d596d54dd6198da67ac70`, and GitHub Release `v0.6.1` contains the previously qualified six-file ZIP with SHA-256 `284979f01968c705fa253b72b0cdba6e24c7d1acbcccb80655c02adcbc266975`. The current `develop` working tree also contains newer, uncommitted UI/source/manifest/test work, so it is not the same candidate as that tagged ZIP. WordPress.org publication must choose one exact baseline: preserve and separately approve the tagged 0.6.1 ZIP, or retain the newer work as a later versioned candidate and fully qualify a new exact artifact. This milestone makes no publication decision and does not regenerate an artifact. WordPress.org publication status, slug/account authorization, naming and trademark confirmation, contributor access, 2FA, monitored review correspondence, and exact-ZIP compliance approval remain unverified. This checkpoint supersedes older statements below that describe 0.6.1 as untagged, unpublished on GitHub, or the working tree as clean.
@@ -17,11 +19,11 @@
 |---|---|
 | Product | Zen by MPTY |
 | Candidate under qualification | 0.7.0 |
-| Status | **0.7.0 COMMITTED RC / CI AND PLUGIN CHECK PASS / TRUE 200% ZOOM NOT VERIFIED** |
+| Status | **0.7.0 TECHNICALLY APPROVED EXACT ZIP / OWNER PREREQUISITES AND TRUE 200% ZOOM PENDING** |
 | Branch | `develop` |
-| Candidate commit | `18518127f5ef69e798b0609d42821a30faddcbf6`; the final documentation-only reconciliation follows it without changing the production manifest |
+| Candidate commit | `350a649fba46f9c4ab33b1fe0c724f9062330c5c` before this final documentation-only evidence update; no production-manifest file changed |
 | GitHub release | 0.6.1, tag `v0.6.1` |
-| 0.7.0 CI | PASS - run `38447172638` for the bounded product candidate; final documentation-only commit must also pass |
+| 0.7.0 CI | PASS - runs `38447172638` and `38447802812`; the latter supplied the freshly downloaded canonical artifact used for final review |
 | Repository | <https://github.com/Justinas-beep/zen-by-mpty> |
 
 The qualified 0.6.1 artifact includes the accepted removal of a never-public development-era settings migration, its marker handling, and its dedicated tests and documentation. It is anchored to tag `v0.6.1`, commit `90b04b955fea5cabb28d596d54dd6198da67ac70`, and the checksum above. Its GitHub Release is published. WordPress.org publication and exact-artifact compliance approval have not been established by this repository review.
@@ -41,7 +43,7 @@ Zen operates only in `wp-admin`. Classification runs locally against the browser
 
 ## 3. Current shipped capabilities
 
-The 0.6.1 candidate provides:
+The 0.7.0 candidate retains and presents the following capabilities:
 
 - a conservative DOM classifier with operational evidence taking priority;
 - separate settings for promotional notices, review requests, and other promotional UI;
@@ -175,7 +177,7 @@ Compatibility claims must be reconsidered if headers, readme metadata, CI, or ru
 
 Zen has one Free WordPress.org production profile. It does not have Guard's separate direct/commercial profile.
 
-The authoritative six-file production manifest is `scripts/production-manifest.php`. `scripts/build-production.php` builds a deterministic ZIP and validates its exact file set, one-directory ZIP layout, versions, and production PHP syntax. `scripts/release.ps1` performs fail-fast preflight on clean `develop`, requires explicit manual-QA acknowledgement, runs the release checks, and records the checksum. `RELEASE-CHECKLIST.md`, `RELEASE-PROCESS.md`, and `ENGINEERING-STANDARD.md` are binding repository guidance.
+The authoritative seven-file production manifest is `scripts/production-manifest.php`. `scripts/build-production.php` builds a deterministic ZIP and validates its exact file set, one-directory ZIP layout, versions, and production PHP syntax. `scripts/release.ps1` performs fail-fast preflight on clean `develop`, requires explicit manual-QA acknowledgement, runs the release checks, and records the checksum. `RELEASE-CHECKLIST.md`, `RELEASE-PROCESS.md`, and `ENGINEERING-STANDARD.md` are binding repository guidance.
 
 GitHub Actions independently runs source/static checks, PHP 7.4 production syntax, minimum/current WordPress compatibility, exact artifact build and revalidation, checksum verification, artifact handoff, and Plugin Check. Ordinary CI does not merge, tag, publish, or create a GitHub Release. Promotion and WordPress.org publication remain separately authorized human-controlled steps.
 
@@ -332,7 +334,7 @@ The following items are deliberately deferred and do not block publishing 0.6.1:
 
 **Zen 0.6.0 is publicly released.**
 
-**Zen 0.6.1 is qualified and published as a GitHub Release.** WordPress.org publication status and exact-ZIP compliance approval remain unverified. Newer local UI work is a separate potential later candidate and must not be mixed with the tagged 0.6.1 artifact.
+**Zen 0.6.1 is qualified and published as a GitHub Release.** Zen 0.7.0 is the separately versioned, technically approved WordPress.org candidate identified in the final checkpoint at the top of this document. It has not been tagged, published, submitted, or deployed. Owner-side WordPress.org access and identity confirmations plus true numeric 200% zoom remain pending.
 
 There is no known product release blocker. Do not reopen product development or qualification without a concrete new reason. Resume from:
 
@@ -402,6 +404,7 @@ At creation time, the following were independently verified:
 - repository path, branch, clean/synchronized state, HEAD, remote, and tags;
 - 0.6.0 ZIP path and SHA-256;
 - 0.6.1 ZIP path, SHA-256, one-directory layout, six-file count, and exact manifest;
+- 0.7.0 canonical CI ZIP, SHA-256, one-directory layout, seven-file count, exact manifest, and byte-for-byte Local5 installation identity;
 - final CI run, candidate commit, and every required job result;
 - WordPress/PHP declarations and CI matrix;
 - settings keys, session key, uninstall behavior, capabilities, and product-state detection;
