@@ -15,6 +15,7 @@ test('admin UI follows the canonical MPTY header geometry', () => {
 
 test('admin UI uses selective containment without legacy patch rules', () => {
 	assert.match(css, /\.mpty-ui__panel\s*{[^}]*border:\s*1px solid var\(--mpty-line\);[^}]*border-radius:\s*var\(--mpty-radius\);[^}]*background:\s*var\(--mpty-surface\);/s);
+	assert.match(css, /\.mpty-ui > \.wp-header-end\s*{[^}]*visibility:\s*hidden;[^}]*margin:\s*0;[^}]*border:\s*0;/s);
 	assert.doesNotMatch(css, /!important/);
 	assert.doesNotMatch(css, /mpty-ui__(?:panel--soft|panel--flat|eyebrow|intro|muted|button--primary)/);
 	assert.doesNotMatch(css, /border-(?:left|inline-start)/);

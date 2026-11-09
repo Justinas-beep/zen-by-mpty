@@ -235,6 +235,7 @@ final class MPTY_Zen {
 					<span id="mpty-zen-status" class="mpty-ui__badge <?php echo ! empty( $settings['enabled'] ) ? 'mpty-ui__badge--good' : ''; ?>" aria-live="polite"><?php echo ! empty( $settings['enabled'] ) ? esc_html__( 'Active', 'zen-by-mpty' ) : esc_html__( 'Inactive', 'zen-by-mpty' ); ?></span>
 				</div>
 			</header>
+			<hr class="wp-header-end">
 
 			<div class="mpty-ui__content">
 				<div class="mpty-ui__columns">

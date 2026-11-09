@@ -162,6 +162,12 @@
 	padding: 24px 0 0;
 }
 
+.mpty-ui > .wp-header-end {
+	visibility: hidden;
+	margin: 0;
+	border: 0;
+}
+
 .mpty-ui__columns {
 	display: grid;
 	grid-template-columns: minmax(0, 1.6fr) minmax(280px, 1fr);
