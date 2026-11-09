@@ -14,6 +14,7 @@ final class ProductionManifestTest extends TestCase {
 
 		$this->assertSame(
 			array(
+				'LICENSE',
 				'assets/css/admin.css',
 				'assets/js/admin.js',
 				'assets/js/classifier.js',

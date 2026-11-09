@@ -8,6 +8,7 @@
  */
 
 return array(
+	'LICENSE',
 	'assets/css/admin.css',
 	'assets/js/admin.js',
 	'assets/js/classifier.js',

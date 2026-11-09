@@ -4,7 +4,7 @@ Tags: admin, notices, cleanup, productivity, dashboard
 Requires at least: 6.4
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.7.0
+Stable tag: 0.7.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -19,6 +19,8 @@ Zen uses conservative local classification designed to leave operational, securi
 Zen only changes what is shown in WordPress admin. It does not delete another plugin's notices, settings, database records or other data.
 
 Zen runs locally in WordPress admin. It does not modify the public-facing website, make remote requests, collect analytics or send telemetry.
+
+Zen is licensed under GPLv2 or later. The complete GNU GPL version 2 text is included in the plugin's `LICENSE` file.
 
 == Installation ==
 
@@ -53,6 +55,12 @@ No. Zen does not load frontend scripts or styles and does not modify theme outpu
 No. Zen works locally and makes no remote requests.
 
 == Changelog ==
+
+= 0.7.1 =
+* Added the complete GNU GPL version 2 license text to the distributed plugin package.
+* Added Loop by MPTY to the local-only MPTY tools status list.
+* Aligned the User Guide utility with the shared MPTY header pattern.
+* Kept WordPress operational notices outside Zen's product header at narrow widths.
 
 = 0.7.0 =
 * Refreshed the settings screen with the shared MPTY product header and clearer section hierarchy.
@@ -113,5 +121,5 @@ No. Zen works locally and makes no remote requests.
 
 == Upgrade Notice ==
 
-= 0.7.0 =
-Refreshes Zen's settings experience while preserving its local, conservative suppression behavior.
+= 0.7.1 =
+Completes the distributed GPL license materials and refines the settings header without changing suppression behavior.
