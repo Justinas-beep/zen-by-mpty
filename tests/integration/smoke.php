@@ -65,6 +65,8 @@ mpty_zen_smoke_assert( is_string( $settings_html ) && false !== strpos( $setting
 mpty_zen_smoke_assert( false !== strpos( $settings_html, 'Other MPTY tools' ), 'MPTY tools section did not render inside Zen settings.' );
 mpty_zen_smoke_assert( false !== strpos( $settings_html, 'Loop by MPTY' ), 'Loop did not render inside the MPTY tools section.' );
 mpty_zen_smoke_assert( false !== strpos( $settings_html, 'https://mptyprojects.com/docs/zen/' ), 'Zen User Guide link did not render.' );
+mpty_zen_smoke_assert( false !== strpos( $settings_html, 'mpty-ui__quiet-link-icon' ), 'Zen User Guide icon did not render.' );
+mpty_zen_smoke_assert( false !== strpos( $settings_html, 'M12 5v15 M12 5C9 3 5 3 2 4v15c3-1 7-1 10 1 3-2 7-2 10-1V4c-3-1-7-1-10 1Z' ), 'Zen User Guide icon did not use the shared open-book glyph.' );
 mpty_zen_smoke_assert( false !== strpos( $settings_html, 'wp-header-end' ), 'WordPress notice anchor did not render.' );
 mpty_zen_smoke_assert( strpos( $settings_html, 'wp-header-end' ) > strpos( $settings_html, '</header>' ), 'WordPress notice anchor must remain outside the product header.' );
 mpty_zen_smoke_assert( false !== strpos( $settings_html, 'mpty-ui__panel' ), 'MPTY settings panels did not render.' );

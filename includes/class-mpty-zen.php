@@ -231,7 +231,12 @@ final class MPTY_Zen {
 					</div>
 				</div>
 				<div class="mpty-ui__header-utilities">
-					<a class="mpty-ui__quiet-link" href="<?php echo esc_url( 'https://mptyprojects.com/docs/zen/' ); ?>"><?php echo esc_html__( 'User Guide', 'zen-by-mpty' ); ?></a>
+					<a class="mpty-ui__quiet-link" href="<?php echo esc_url( 'https://mptyprojects.com/docs/zen/' ); ?>">
+						<svg class="mpty-ui__quiet-link-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+							<path d="M12 5v15 M12 5C9 3 5 3 2 4v15c3-1 7-1 10 1 3-2 7-2 10-1V4c-3-1-7-1-10 1Z"></path>
+						</svg>
+						<span><?php echo esc_html__( 'User Guide', 'zen-by-mpty' ); ?></span>
+					</a>
 					<span id="mpty-zen-status" class="mpty-ui__badge <?php echo ! empty( $settings['enabled'] ) ? 'mpty-ui__badge--good' : ''; ?>" aria-live="polite"><?php echo ! empty( $settings['enabled'] ) ? esc_html__( 'Active', 'zen-by-mpty' ) : esc_html__( 'Inactive', 'zen-by-mpty' ); ?></span>
 				</div>
 			</header>
