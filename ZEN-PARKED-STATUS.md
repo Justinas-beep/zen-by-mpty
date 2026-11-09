@@ -1,6 +1,6 @@
 # Zen by MPTY - Parked Status and Restart Manual
 
-> **0.7.1 candidate preparation - 2026-11-09:** The published GitHub `v0.7.0` release remains immutable at SHA-256 `506656aec8095f65e1bccf1900a754fa05013dd1dec86256a2cdab8f7a149117`. It is historical evidence only and is no longer the proposed WordPress.org submission baseline because its seven-file payload omitted a bundled GPL license copy and later accepted UI bytes differ. The current `develop` candidate is versioned as 0.7.1, adds the unmodified canonical GNU GPL version 2 text as `LICENSE`, and uses an eight-file production manifest. It must receive fresh exact-artifact CI identity and WordPress.org compliance approval before submission. Do not modify, replace, or submit the published 0.7.0 ZIP.
+> **0.7.1 candidate checkpoint - 2026-11-09:** The published GitHub `v0.7.0` release remains immutable at SHA-256 `506656aec8095f65e1bccf1900a754fa05013dd1dec86256a2cdab8f7a149117`. It is historical evidence only and is no longer the proposed WordPress.org submission baseline because its seven-file payload omitted a bundled GPL license copy and later accepted UI bytes differ. The current `develop` candidate is versioned as 0.7.1, adds the unmodified canonical GNU GPL version 2 text as `LICENSE`, and uses an eight-file production manifest. Production source commit `36961af8a925e4909394fbdd47484ca3c1bd8cd0` and fail-closed artifact-workflow commit `a555917f2f339e05753480503a7ea251f0062dac` passed GitHub Actions run `42643311770`, including PHP 7.4 production syntax, source gates on PHP 8.2 and 8.4, WordPress 6.4 / PHP 7.4 and current WordPress / PHP 8.4 compatibility, exact artifact handoff, and Plugin Check. The canonical CI artifact is `zen-by-mpty-0.7.1.zip`, 24,988 bytes, SHA-256 `7b6131509957665b3f4992d75ee7d761d4a4b3cf4855256554244ce721ab3f88`. Its eight-file payload matches the authoritative manifest. Separate exact-ZIP WordPress.org compliance approval and owner submission prerequisites remain pending. Do not modify, replace, or submit the published 0.7.0 ZIP.
 
 > **0.7.0 owner manual acceptance - 2026-10-25:** The product owner reports that Zen was manually inspected on Local5 at true browser 200% zoom and passed. This is recorded as **OWNER-REPORTED PASS**, not as a Codex-observed test. It closes the pending numeric zoom acceptance only. Formal screen-reader testing and WooCommerce-specific page testing remain **NOT VERIFIED**. Neither is a mandatory release blocker under the current Zen engineering standard: the required keyboard, labels, visible focus, control-state, status, responsive, classifier-safety, and representative WordPress/plugin-admin checks are already verified, while WooCommerce is not a Zen dependency and was not available in the accepted environment. No broader unverified checklist row is converted to PASS by this owner report.
 
@@ -23,11 +23,11 @@
 |---|---|
 | Product | Zen by MPTY |
 | Candidate under qualification | 0.7.1 |
-| Status | **0.7.1 SOURCE CANDIDATE / EXACT CI ARTIFACT AND SUBMISSION APPROVAL PENDING** |
+| Status | **0.7.1 CI-QUALIFIED EXACT ZIP / WORDPRESS.ORG COMPLIANCE APPROVAL PENDING** |
 | Branch | `develop` |
-| Candidate commit | To be recorded after the bounded 0.7.1 checkpoint |
+| Candidate commit | Production source `36961af8a925e4909394fbdd47484ca3c1bd8cd0`; artifact workflow `a555917f2f339e05753480503a7ea251f0062dac` |
 | GitHub release | 0.7.0, tag `v0.7.0`; do not replace or retag |
-| 0.7.1 CI | Pending bounded checkpoint |
+| 0.7.1 CI | PASS - run `42643311770`; canonical ZIP SHA-256 `7b6131509957665b3f4992d75ee7d761d4a4b3cf4855256554244ce721ab3f88` |
 | Repository | <https://github.com/Justinas-beep/zen-by-mpty> |
 
 ### Historical 0.7.0 WordPress.org handoff - superseded
@@ -42,7 +42,7 @@ The following artifact remains useful historical qualification evidence, but mus
 - Historical production boundary: seven files beneath one `zen-by-mpty/` directory.
 - Superseding issue: the archive does not include a copy of the declared GPLv2 license text, and newer accepted source differs.
 
-The next submission candidate is 0.7.1. Its exact CI ZIP filename, checksum, commit and separate compliance approval must be recorded after the bounded checkpoint. The authoritative manifest now contains eight files, including `LICENSE`.
+The next submission candidate is 0.7.1. Its canonical CI ZIP is `zen-by-mpty-0.7.1.zip`, 24,988 bytes, SHA-256 `7b6131509957665b3f4992d75ee7d761d4a4b3cf4855256554244ce721ab3f88`. The authoritative manifest contains eight files, including `LICENSE`. Separate exact-ZIP WordPress.org compliance approval remains required before submission.
 
 **OWNER ACTIONS BEFORE INITIAL SUBMISSION**
 
@@ -362,7 +362,7 @@ The following items are deliberately deferred and do not block publishing 0.6.1:
 
 **Zen 0.6.0 is publicly released.**
 
-**Zen 0.6.1 and 0.7.0 are published as GitHub Releases.** Zen 0.7.1 is the new source candidate identified in the superseding checkpoint at the top of this document. It has not been tagged, published, submitted, or deployed. Fresh exact-artifact identity and WordPress.org approval remain pending.
+**Zen 0.6.1 and 0.7.0 are published as GitHub Releases.** Zen 0.7.1 is the new source candidate identified in the superseding checkpoint at the top of this document. It has not been tagged, published, submitted, or deployed. Its exact CI artifact is recorded; separate WordPress.org compliance approval remains pending.
 
 There is no known product release blocker. Do not reopen product development or qualification without a concrete new reason. Resume from:
 
