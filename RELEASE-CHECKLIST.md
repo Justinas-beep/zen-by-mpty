@@ -21,6 +21,8 @@ Complete this checklist against the exact commit and ZIP intended for release. A
 
 ## Product and manual QA
 
+Use the Git-linked site for development checks and protected Hostinger staging for release acceptance. Run the environment preflight in [AGENTS.md](AGENTS.md) before browser automation or site operations.
+
 - [ ] Clean install, activation, deactivation/reactivation, settings save, and uninstall are tested in a disposable site.
 - [ ] Zen defaults to conservative suppression and uncertain content remains visible.
 - [ ] Pause restores no-display, block, flex, grid, and `!important` inline display states exactly across repeated cycles.
