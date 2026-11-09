@@ -15,6 +15,15 @@
 	let batchScheduled = false;
 	let observer = null;
 
+	const protectedNoticeSelectors = [
+		'.notice-error',
+		'.notice-warning',
+		'.update-nag',
+		'.maintenance-nag',
+		'[role="alert"]',
+		'.plugin-update-tr'
+	].join(',');
+
 	const neverHideSelectors = [
 		'#wpadminbar',
 		'#adminmenu',
@@ -22,12 +31,8 @@
 		'#adminmenuwrap',
 		'#screen-meta',
 		'#screen-meta-links',
-		'.update-nag',
-		'.maintenance-nag',
-		'.notice-error',
 		'.error',
-		'[role="alert"]',
-		'.plugin-update-tr',
+		protectedNoticeSelectors,
 		'.plugin-card',
 		'.media-modal',
 		'.components-modal__frame',
@@ -35,6 +40,7 @@
 	].join(',');
 
 	const protectedDescendantSelectors = [
+		protectedNoticeSelectors,
 		'.wp-list-table',
 		'.tablenav',
 		'#posts-filter',
@@ -118,7 +124,19 @@
 			return true;
 		}
 
-		return Boolean(element.querySelector && element.querySelector(protectedDescendantSelectors));
+		if (element.querySelector && element.querySelector(protectedDescendantSelectors)) {
+			return true;
+		}
+
+		if (element.querySelectorAll) {
+			for (const descendant of Array.from(element.querySelectorAll(candidateSelector())).slice(0, MAX_NODES_PER_BATCH)) {
+				if (isOperationalCandidate(descendant)) {
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 
 	function isExternalUrl(value) {
@@ -217,6 +235,7 @@
 			isNotice: Boolean(element.matches && element.matches('.notice,.updated,[class*="notice" i],[class*="nag" i]')),
 			isDashboardWidget: Boolean(element.matches && element.matches('#dashboard-widgets .postbox,.postbox')),
 			isCoreError: Boolean(element.matches && element.matches('.notice-error,.error,[role="alert"]')),
+			isWarning: Boolean(element.matches && element.matches('.notice-warning,.update-nag,.maintenance-nag')),
 			hasDismiss: Boolean(element.querySelector && element.querySelector('.notice-dismiss,[class*="dismiss" i],[aria-label*="dismiss" i],[aria-label*="close" i]')),
 			signature: signature
 		};
@@ -254,6 +273,25 @@
 		return result;
 	}
 
+	function isOperationalCandidate(element) {
+		if (!classifier || typeof classifier.classify !== 'function' || !element || element.nodeType !== 1) {
+			return false;
+		}
+		if (element.matches && element.matches(protectedNoticeSelectors)) {
+			return true;
+		}
+		if (!element.matches || !element.matches(candidateSelector())) {
+			return false;
+		}
+
+		const features = makeFeatures(element);
+		if (features.text.length > MAX_TEXT) {
+			return false;
+		}
+		const result = classifier.classify(features, settings);
+		return result.decision === 'keep' && result.classification === 'OPERATIONAL';
+	}
+
 	function suppress(element, result) {
 		if (
 			!element ||
@@ -286,6 +324,60 @@
 		const result = classifyElement(element);
 		if (result && result.decision === 'suppress') {
 			suppress(element, result);
+		}
+	}
+
+	function restoreElement(element) {
+		const state = suppressedState.get(element);
+		element.classList.remove(hiddenClass);
+		if (state) {
+			if (state.display) {
+				element.style.setProperty('display', state.display, state.displayPriority);
+			} else {
+				element.style.removeProperty('display');
+			}
+			if (state.hadAriaHidden) {
+				element.setAttribute('aria-hidden', state.ariaHidden);
+			} else {
+				element.removeAttribute('aria-hidden');
+			}
+			if (state.hadReason) {
+				element.setAttribute('data-mpty-zen-reason', state.reason);
+			} else {
+				element.removeAttribute('data-mpty-zen-reason');
+			}
+		} else {
+			element.removeAttribute('aria-hidden');
+			element.removeAttribute('data-mpty-zen-reason');
+			element.style.removeProperty('display');
+		}
+	}
+
+	function restoreProtectedAncestors(scope) {
+		const protectedElements = new Set();
+		if (isOperationalCandidate(scope)) {
+			protectedElements.add(scope);
+		}
+		if (scope.querySelectorAll) {
+			for (const element of scope.querySelectorAll(protectedNoticeSelectors)) {
+				protectedElements.add(element);
+			}
+			for (const element of Array.from(scope.querySelectorAll(candidateSelector())).slice(0, MAX_NODES_PER_BATCH)) {
+				if (isOperationalCandidate(element)) {
+					protectedElements.add(element);
+				}
+			}
+		}
+
+		for (const protectedElement of protectedElements) {
+			let suppressedAncestor = protectedElement.closest('.' + hiddenClass);
+			while (suppressedAncestor) {
+				const parent = suppressedAncestor.parentElement;
+				if (suppressedState.has(suppressedAncestor)) {
+					restoreElement(suppressedAncestor);
+				}
+				suppressedAncestor = parent && parent.closest('.' + hiddenClass);
+			}
 		}
 	}
 
@@ -361,29 +453,7 @@
 
 	function restorePage() {
 		for (const element of document.querySelectorAll('.' + hiddenClass)) {
-			const state = suppressedState.get(element);
-			element.classList.remove(hiddenClass);
-			if (state) {
-				if (state.display) {
-					element.style.setProperty('display', state.display, state.displayPriority);
-				} else {
-					element.style.removeProperty('display');
-				}
-				if (state.hadAriaHidden) {
-					element.setAttribute('aria-hidden', state.ariaHidden);
-				} else {
-					element.removeAttribute('aria-hidden');
-				}
-				if (state.hadReason) {
-					element.setAttribute('data-mpty-zen-reason', state.reason);
-				} else {
-					element.removeAttribute('data-mpty-zen-reason');
-				}
-			} else {
-				element.removeAttribute('aria-hidden');
-				element.removeAttribute('data-mpty-zen-reason');
-				element.style.removeProperty('display');
-			}
+			restoreElement(element);
 		}
 	}
 
@@ -410,6 +480,8 @@
 					if (!node || node.nodeType !== 1) {
 						continue;
 					}
+
+					restoreProtectedAncestors(node);
 
 					if (deepProcessing) {
 						queueNode(node);

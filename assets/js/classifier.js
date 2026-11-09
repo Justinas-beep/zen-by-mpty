@@ -166,6 +166,10 @@
 			operational.value += 25;
 			signals.push('operational:core-error-container');
 		}
+		if (features.isWarning) {
+			operational.value += 25;
+			signals.push('operational:wordpress-warning-container');
+		}
 		if (/(?:^|[\s_-])(error|critical|failed|failure|vulnerability|malware)(?:$|[\s_-])/i.test(attr)) {
 			operational.value += 7;
 			signals.push('operational:error-metadata');

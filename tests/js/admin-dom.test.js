@@ -194,6 +194,47 @@ test('an explicitly promotional card is still hidden', () => {
 	dom.window.close();
 });
 
+test('a promotional wrapper cannot conceal a protected child alert', () => {
+	const dom = boot('<section id="wrapper" class="promo-banner">Upgrade to Pro today.<div id="alert" role="alert">Your site is at risk. Install the available patch now.</div></section>');
+	const wrapper = dom.window.document.getElementById('wrapper');
+	const alert = dom.window.document.getElementById('alert');
+	assert.notEqual(wrapper.style.getPropertyValue('display'), 'none');
+	assert.notEqual(alert.style.getPropertyValue('display'), 'none');
+	assert.equal(wrapper.classList.contains('mpty-zen-suppressed'), false);
+	dom.window.close();
+});
+
+test('a mixed promotional and operational WordPress warning remains visible', () => {
+	const dom = boot('<div id="warning" class="notice notice-warning promo-banner">Upgrade to Pro today. Important: install the available patch now.</div>');
+	const warning = dom.window.document.getElementById('warning');
+	assert.notEqual(warning.style.getPropertyValue('display'), 'none');
+	assert.equal(warning.getAttribute('aria-hidden'), null);
+	dom.window.close();
+});
+
+test('a protected alert inserted into a suppressed wrapper restores the wrapper', async () => {
+	const dom = boot('<section id="wrapper" class="promo-banner">Upgrade to Pro now</section>');
+	const wrapper = dom.window.document.getElementById('wrapper');
+	assert.equal(wrapper.style.getPropertyValue('display'), 'none');
+
+	const alert = dom.window.document.createElement('div');
+	alert.id = 'dynamic-alert';
+	alert.className = 'notice vendor-status';
+	alert.textContent = 'Security warning: vulnerability detected. Update required.';
+	wrapper.appendChild(alert);
+
+	assert.equal(await waitFor(dom, () => wrapper.style.getPropertyValue('display') !== 'none'), true);
+	assert.equal(wrapper.classList.contains('mpty-zen-suppressed'), false);
+	assert.notEqual(alert.style.getPropertyValue('display'), 'none');
+
+	toggle(dom);
+	assert.notEqual(wrapper.style.getPropertyValue('display'), 'none');
+	toggle(dom);
+	assert.notEqual(wrapper.style.getPropertyValue('display'), 'none');
+	assert.notEqual(alert.style.getPropertyValue('display'), 'none');
+	dom.window.close();
+});
+
 test('a dynamically inserted promotion is suppressed and faithfully restored', async () => {
 	const dom = boot('');
 	const promo = dom.window.document.createElement('div');

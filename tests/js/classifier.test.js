@@ -13,6 +13,7 @@ function features(overrides) {
 		isNotice: true,
 		isDashboardWidget: false,
 		isCoreError: false,
+		isWarning: false,
 		hasDismiss: false
 	}, overrides || {});
 }
@@ -44,6 +45,7 @@ const mustKeep = [
 	['payment failure', features({ text: 'Payment failed for your active service.' })],
 	['expired credentials', features({ text: 'API credentials expired and synchronization stopped.' })],
 	['security notice', features({ text: 'Security warning: vulnerability detected.' })],
+	['mixed native warning', features({ text: 'Upgrade to Pro today. Important: install the available patch now.', isWarning: true })],
 	['destructive confirmation', features({ text: 'Confirm permanent delete. This cannot be undone.' })],
 	['setup required', features({ text: 'Setup required before the integration can operate.' })],
 	['ordinary settings form', features({ text: 'General settings Save changes', isNotice: false })],

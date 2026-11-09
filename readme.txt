@@ -61,6 +61,7 @@ No. Zen works locally and makes no remote requests.
 * Added Loop by MPTY to the local-only MPTY tools status list.
 * Aligned the User Guide utility with the shared MPTY header pattern.
 * Kept WordPress operational notices outside Zen's product header at narrow widths.
+* Prevented promotional wrappers from concealing existing or dynamically inserted operational alerts.
 
 = 0.7.0 =
 * Refreshed the settings screen with the shared MPTY product header and clearer section hierarchy.
@@ -122,4 +123,4 @@ No. Zen works locally and makes no remote requests.
 == Upgrade Notice ==
 
 = 0.7.1 =
-Completes the distributed GPL license materials and refines the settings header without changing suppression behavior.
+Completes the distributed GPL license materials and strengthens conservative operational-notice protection.
