@@ -1,5 +1,5 @@
 === Zen by MPTY ===
-Contributors: mpty-projects
+Contributors: mptyprojects
 Tags: admin, notices, cleanup, productivity, dashboard
 Requires at least: 6.4
 Tested up to: 7.1
