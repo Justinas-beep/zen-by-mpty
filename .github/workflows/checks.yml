@@ -80,23 +80,37 @@ jobs:
       - name: Build exact production artifact
         run: php scripts/build-production.php build --source="$GITHUB_WORKSPACE" --output="$GITHUB_WORKSPACE/build"
 
+      - name: Resolve exact artifact identity
+        shell: bash
+        run: |
+          mapfile -t zips < <(find build -maxdepth 1 -type f -name 'zen-by-mpty-*.zip' -print)
+          if [[ "${#zips[@]}" -ne 1 ]]; then
+            printf 'Expected exactly one Zen production ZIP, found %s.\n' "${#zips[@]}" >&2
+            exit 1
+          fi
+          zip="${zips[0]}"
+          checksum="${zip}.sha256"
+          if [[ ! -f "$checksum" ]]; then
+            printf 'Missing checksum for %s.\n' "$zip" >&2
+            exit 1
+          fi
+          printf 'ZEN_ZIP=%s\n' "$zip" >> "$GITHUB_ENV"
+          printf 'ZEN_CHECKSUM=%s\n' "$checksum" >> "$GITHUB_ENV"
+
       - name: Revalidate final ZIP
-        run: php scripts/build-production.php validate --source="$GITHUB_WORKSPACE" --zip="$GITHUB_WORKSPACE/build/zen-by-mpty-0.7.1.zip"
+        run: php scripts/build-production.php validate --source="$GITHUB_WORKSPACE" --zip="$GITHUB_WORKSPACE/$ZEN_ZIP"
 
       - name: Show production contents and verify checksum
         run: |
           find build/zen-by-mpty -type f -print | sort
           cd build
-          sha256sum --check zen-by-mpty-0.7.1.zip.sha256
+          sha256sum --check "$(basename "$ZEN_CHECKSUM")"
 
       - name: Preserve validated artifact
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: zen-wordpress-org-artifact
-          path: |
-            build/zen-by-mpty
-            build/zen-by-mpty-0.7.1.zip
-            build/zen-by-mpty-0.7.1.zip.sha256
+          path: build
           if-no-files-found: error
           retention-days: 7
 
@@ -121,10 +135,22 @@ jobs:
           path: build
 
       - name: Verify artifact after CI handoff
+        shell: bash
         run: |
-          php scripts/build-production.php validate --source="$GITHUB_WORKSPACE" --zip="$GITHUB_WORKSPACE/build/zen-by-mpty-0.7.1.zip"
+          mapfile -t zips < <(find build -maxdepth 1 -type f -name 'zen-by-mpty-*.zip' -print)
+          if [[ "${#zips[@]}" -ne 1 ]]; then
+            printf 'Expected exactly one Zen production ZIP after handoff, found %s.\n' "${#zips[@]}" >&2
+            exit 1
+          fi
+          zip="${zips[0]}"
+          checksum="${zip}.sha256"
+          if [[ ! -f "$checksum" ]]; then
+            printf 'Missing checksum for %s after handoff.\n' "$zip" >&2
+            exit 1
+          fi
+          php scripts/build-production.php validate --source="$GITHUB_WORKSPACE" --zip="$GITHUB_WORKSPACE/$zip"
           cd build
-          sha256sum --check zen-by-mpty-0.7.1.zip.sha256
+          sha256sum --check "$(basename "$checksum")"
 
       - name: Run Plugin Check against production files
         uses: WordPress/plugin-check-action@10857da14b6c2246d15402b3e69f777edcf8c12e # v1
