@@ -75,7 +75,7 @@ The 0.7.0 candidate retains and presents the following capabilities:
 - post-load dynamic-content handling through a bounded, deduplicated `MutationObserver` queue;
 - session-scoped Pause/Resume with faithful display, priority, ARIA, and diagnostic-state restoration;
 - a native settings screen at **Settings → Zen by MPTY**;
-- local-only Guard by MPTY and Sign by MPTY status reporting as Active, Installed, or Not installed;
+- local-only Guard by MPTY, Sign by MPTY and Loop by MPTY status reporting as Active, Installed, or Not installed;
 - diagnostics exposed only when both `WP_DEBUG` and `MPTY_ZEN_DEBUG` are enabled;
 - allowlisted settings persistence; and
 - uninstall cleanup for Zen's canonical option.
@@ -160,9 +160,9 @@ Zen is currently one Free product. It has no Free/Pro split, paid entitlement mo
 
 ## 11. MPTY product-status integration
 
-Zen's settings page displays local status for Guard by MPTY and Sign by MPTY. It uses WordPress's installed-plugin inventory and `is_plugin_active()`. Standard plugin paths are recognized directly; exact plugin names provide a fallback for nonstandard directories.
+Zen's settings page displays local status for Guard by MPTY, Sign by MPTY and Loop by MPTY. It uses WordPress's installed-plugin inventory and `is_plugin_active()`. Standard plugin paths are recognized directly; exact plugin names provide a fallback for nonstandard directories.
 
-The three visible states are Active, Installed, and Not installed. Detection is entirely local, does not query an account or license, and creates no dependency. Zen remains fully functional when Guard and Sign are absent.
+The three visible states are Active, Installed, and Not installed. Detection is entirely local, does not query an account or license, and creates no dependency. Zen remains fully functional when Guard, Sign and Loop are absent.
 
 ## 12. Responsive and accessibility evidence
 

@@ -113,10 +113,25 @@
 	line-height: 21px;
 }
 
-.mpty-ui__header-state {
+.mpty-ui__header-utilities {
 	display: flex;
 	align-items: center;
+	justify-content: flex-end;
+	gap: 16px;
+	flex-wrap: wrap;
 	white-space: nowrap;
+}
+
+.mpty-ui__quiet-link {
+	color: var(--mpty-accent-hover);
+	font-size: 13px;
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.mpty-ui__quiet-link:hover {
+	color: var(--mpty-accent);
+	text-decoration: underline;
 }
 
 .mpty-ui__badge {
@@ -402,7 +417,8 @@
 		height: 27px;
 	}
 
-	.mpty-ui__header-state {
+	.mpty-ui__header-utilities {
+		justify-content: flex-start;
 		margin-inline-start: 44px;
 	}
 

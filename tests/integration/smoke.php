@@ -63,6 +63,8 @@ $zen->render_settings_page();
 $settings_html = ob_get_clean();
 mpty_zen_smoke_assert( is_string( $settings_html ) && false !== strpos( $settings_html, 'mpty-zen-toggle-reveal' ), 'Settings page did not render.' );
 mpty_zen_smoke_assert( false !== strpos( $settings_html, 'Other MPTY tools' ), 'MPTY tools section did not render inside Zen settings.' );
+mpty_zen_smoke_assert( false !== strpos( $settings_html, 'Loop by MPTY' ), 'Loop did not render inside the MPTY tools section.' );
+mpty_zen_smoke_assert( false !== strpos( $settings_html, 'https://mptyprojects.com/docs/zen/' ), 'Zen User Guide link did not render.' );
 mpty_zen_smoke_assert( false !== strpos( $settings_html, 'mpty-ui__panel' ), 'MPTY settings panels did not render.' );
 mpty_zen_smoke_assert( false !== strpos( $settings_html, 'mpty-zen-status' ), 'Zen status did not render.' );
 mpty_zen_smoke_assert( false !== strpos( $settings_html, 'mpty-ui__product-icon' ), 'Zen product icon did not render.' );

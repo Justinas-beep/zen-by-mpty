@@ -230,7 +230,8 @@ final class MPTY_Zen {
 						<p class="mpty-ui__product-purpose"><?php echo esc_html__( 'A quieter WordPress admin, without changing how WordPress works.', 'zen-by-mpty' ); ?></p>
 					</div>
 				</div>
-				<div class="mpty-ui__header-state">
+				<div class="mpty-ui__header-utilities">
+					<a class="mpty-ui__quiet-link" href="<?php echo esc_url( 'https://mptyprojects.com/docs/zen/' ); ?>"><?php echo esc_html__( 'User Guide', 'zen-by-mpty' ); ?></a>
 					<span id="mpty-zen-status" class="mpty-ui__badge <?php echo ! empty( $settings['enabled'] ) ? 'mpty-ui__badge--good' : ''; ?>" aria-live="polite"><?php echo ! empty( $settings['enabled'] ) ? esc_html__( 'Active', 'zen-by-mpty' ) : esc_html__( 'Inactive', 'zen-by-mpty' ); ?></span>
 				</div>
 			</header>
@@ -324,6 +325,11 @@ final class MPTY_Zen {
 				'name'        => 'Sign by MPTY',
 				'plugin_file' => 'sign-by-mpty/sign-by-mpty.php',
 				'description' => __( 'Visitor registration, consent and electronic signature records.', 'zen-by-mpty' ),
+			),
+			array(
+				'name'        => 'Loop by MPTY',
+				'plugin_file' => 'loop-by-mpty/loop-by-mpty.php',
+				'description' => __( 'Subscriptions for your WooCommerce store.', 'zen-by-mpty' ),
 			),
 		);
 		?>
