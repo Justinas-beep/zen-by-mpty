@@ -1,5 +1,7 @@
 # Zen by MPTY - Parked Status and Restart Manual
 
+> **Governance reconciliation checkpoint - 2026-11-11:** Clean synchronized `develop` is at accepted package-source commit `b29e503adc428274d0429286d5c25e0eb93adf6c`. Public GitHub Release `v0.7.1` remains tagged at the original qualified runtime source `84dc5f4c89bca1357beb01b6942251bd548543fe`; the published tag was not moved. Its definitive corrected eight-file asset is `zen-by-mpty-0.7.1.zip`, 25,357 bytes, SHA-256 `116275ef2549dae2ea014bcbfdc2ef2c3b167781dc912a2a01ad2628b2653f66`. The only payload change from the original 0.7.1 asset is the `readme.txt` contributor correction from `mpty-projects` to the authorized `mptyprojects` account. GitHub Actions run `42684893279` passed source, minimum/current compatibility, artifact and Plugin Check jobs for the accepted package source. The GitHub release notes explicitly record the supersession and unchanged tag. WordPress.org submission remains separately authorized and has not occurred. This checkpoint supersedes later current-state or resume statements that describe 0.7.1 as untagged, unpublished, using SHA-256 `cedeaa1cb304c3949a9b5d7b57893557313a897bafbd40c29061ff0f78d3b8c7`, or still awaiting exact submission-artifact identity; those statements remain historical evidence.
+
 > **0.7.1 notice-safety correction checkpoint - 2026-11-09:** Commit `84dc5f4c89bca1357beb01b6942251bd548543fe` corrects the confirmed WordPress.org notice-safety blocker. Protected child alerts now prevent promotional ancestor suppression; native WordPress warning containers are operational; and dynamically inserted protected notices restore Zen-suppressed ancestors before normal bounded processing continues. The three reported failure modes and Pause/Resume preservation have dedicated regression coverage. A real Local5 run on WordPress 7.1.4 / PHP 8.5.12 passed nested-alert, mixed-warning, initial promotional suppression, dynamic restoration and Pause/Resume checks; the temporary fixture, candidate installation, one-click login and site-running state were removed or restored afterward. GitHub Actions run `42667597201` passed PHP 7.4 production syntax, source gates on PHP 8.2 and 8.4, WordPress 6.4 / PHP 7.4 and current WordPress / PHP 8.4 compatibility, exact artifact handoff, and Plugin Check. The superseding canonical CI artifact is `zen-by-mpty-0.7.1.zip`, 25,358 bytes, SHA-256 `cedeaa1cb304c3949a9b5d7b57893557313a897bafbd40c29061ff0f78d3b8c7`; its eight-file payload matches the authoritative manifest. Separate exact-ZIP WordPress.org compliance re-approval and owner submission prerequisites remain pending.
 
 > **Historical pre-safety 0.7.1 candidate checkpoint - superseded 2026-11-09:** The published GitHub `v0.7.0` release remains immutable at SHA-256 `506656aec8095f65e1bccf1900a754fa05013dd1dec86256a2cdab8f7a149117`. It is historical evidence only and is no longer the proposed WordPress.org submission baseline because its seven-file payload omitted a bundled GPL license copy and later accepted UI bytes differ. The pre-safety 0.7.1 candidate added the unmodified canonical GNU GPL version 2 text as `LICENSE` and used an eight-file production manifest. Production source commit `36961af8a925e4909394fbdd47484ca3c1bd8cd0` and fail-closed artifact-workflow commit `a555917f2f339e05753480503a7ea251f0062dac` passed GitHub Actions run `42643311770`. Its canonical CI artifact was `zen-by-mpty-0.7.1.zip`, 24,988 bytes, SHA-256 `7b6131509957665b3f4992d75ee7d761d4a4b3cf4855256554244ce721ab3f88`. That archive is superseded by the notice-safety correction above and must not be submitted. Do not modify, replace, or submit the published 0.7.0 ZIP.
@@ -24,12 +26,12 @@
 | Item | Authoritative parked state |
 |---|---|
 | Product | Zen by MPTY |
-| Candidate under qualification | 0.7.1 |
-| Status | **0.7.1 CI-QUALIFIED EXACT ZIP / WORDPRESS.ORG COMPLIANCE APPROVAL PENDING** |
+| Candidate under qualification | 0.7.1 corrected submission artifact |
+| Status | **0.7.1 GITHUB RELEASE ALIGNED / WORDPRESS.ORG SUBMISSION NOT PERFORMED** |
 | Branch | `develop` |
-| Candidate commit | Notice-safety source `84dc5f4c89bca1357beb01b6942251bd548543fe`; artifact workflow `a555917f2f339e05753480503a7ea251f0062dac` |
-| GitHub release | 0.7.0, tag `v0.7.0`; do not replace or retag |
-| 0.7.1 CI | PASS - run `42667597201`; canonical ZIP SHA-256 `cedeaa1cb304c3949a9b5d7b57893557313a897bafbd40c29061ff0f78d3b8c7` |
+| Candidate commit | Accepted package source `b29e503adc428274d0429286d5c25e0eb93adf6c`; unchanged runtime tag target `84dc5f4c89bca1357beb01b6942251bd548543fe` |
+| GitHub release | 0.7.1, tag `v0.7.1`; corrected asset explicitly supersedes the original asset without moving the tag |
+| 0.7.1 CI | PASS - run `42684893279`; definitive ZIP SHA-256 `116275ef2549dae2ea014bcbfdc2ef2c3b167781dc912a2a01ad2628b2653f66` |
 | Repository | <https://github.com/Justinas-beep/zen-by-mpty> |
 
 ### Historical 0.7.0 WordPress.org handoff - superseded
@@ -44,7 +46,7 @@ The following artifact remains useful historical qualification evidence, but mus
 - Historical production boundary: seven files beneath one `zen-by-mpty/` directory.
 - Superseding issue: the archive does not include a copy of the declared GPLv2 license text, and newer accepted source differs.
 
-The next submission candidate is 0.7.1. Its canonical CI ZIP is `zen-by-mpty-0.7.1.zip`, 25,358 bytes, SHA-256 `cedeaa1cb304c3949a9b5d7b57893557313a897bafbd40c29061ff0f78d3b8c7`. The authoritative manifest contains eight files, including `LICENSE`. Separate exact-ZIP WordPress.org compliance re-approval remains required before submission.
+The definitive submission candidate is 0.7.1. Its corrected CI ZIP is `zen-by-mpty-0.7.1.zip`, 25,357 bytes, SHA-256 `116275ef2549dae2ea014bcbfdc2ef2c3b167781dc912a2a01ad2628b2653f66`. The authoritative manifest contains eight files, including `LICENSE`. WordPress.org submission remains a separate owner-authorized action and has not occurred.
 
 **OWNER ACTIONS BEFORE INITIAL SUBMISSION**
 
