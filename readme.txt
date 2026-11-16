@@ -8,11 +8,11 @@ Stable tag: 0.7.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-A quieter WordPress admin, with less promotional clutter and fewer distractions.
+A quieter WordPress admin with less promotional clutter and fewer distractions.
 
 == Description ==
 
-Zen by MPTY makes WordPress admin quieter by hiding promotional notices, review requests, upsells, sales banners and other non-essential marketing content.
+Zen by MPTY makes WordPress admin quieter by conservatively hiding promotional notices, review requests, upgrade offers, sales banners and other non-essential marketing content.
 
 Zen uses conservative local classification designed to leave operational, security, update, compatibility and error information visible. If Zen is unsure about an item, it leaves it visible.
 
@@ -21,6 +21,14 @@ Zen only changes what is shown in WordPress admin. It does not delete another pl
 Zen runs locally in WordPress admin. It does not modify the public-facing website, make remote requests, collect analytics or send telemetry.
 
 Zen is licensed under GPLv2 or later. The complete GNU GPL version 2 text is included in the plugin's `LICENSE` file.
+
+Highlights:
+
+* Keeps important operational, security, update, compatibility and error information visible.
+* Leaves an item visible when classification is uncertain.
+* Lets administrators pause filtering temporarily and then resume it without changing saved settings.
+* Restores the original display and accessibility state when content is shown again.
+* Runs locally without remote requests, analytics or telemetry.
 
 == Installation ==
 
@@ -54,73 +62,21 @@ No. Zen does not load frontend scripts or styles and does not modify theme outpu
 
 No. Zen works locally and makes no remote requests.
 
+== Screenshots ==
+
+1. Choose which kinds of promotional clutter Zen should hide.
+2. Zen reports the local status of other MPTY tools without remote requests or automatic actions.
+
 == Changelog ==
 
 = 0.7.1 =
-* Added the complete GNU GPL version 2 license text to the distributed plugin package.
-* Added Loop by MPTY to the local-only MPTY tools status list.
-* Aligned the User Guide utility with the shared MPTY header pattern.
-* Kept WordPress operational notices outside Zen's product header at narrow widths.
-* Prevented promotional wrappers from concealing existing or dynamically inserted operational alerts.
-
-= 0.7.0 =
-* Refreshed the settings screen with the shared MPTY product header and clearer section hierarchy.
-* Improved Active, Paused and Inactive state presentation while preserving existing Pause and Resume behavior.
-* Improved responsive settings controls, keyboard focus and high-contrast support.
-
-= 0.6.1 =
-* Fixed Resume so promotional notices already restored by Pause are immediately reevaluated and hidden again when eligible.
-
-= 0.6.0 =
-* Added retained classifier and admin DOM regression coverage with false-positive safety as the priority.
-* Prevented promotional child actions from hiding unrelated functional parent containers.
-* Preserved exact inline display and accessibility state across Pause and Resume cycles.
-* Bounded dynamic DOM processing and yielded between large batches.
-* Added lightweight PHP and JavaScript engineering checks plus Zen-specific release standards.
-* Added a restrained, local-only list of other MPTY tools to Zen's settings page.
-* Refined product wording around a quieter WordPress admin and conservative classification.
-
-= 0.5.0 =
-* Renamed the previous development identity to Zen by MPTY and changed the developer identity to MPTY Projects.
-* Migrated PHP, JavaScript, DOM, asset, settings, build and package identifiers to the canonical MPTY identity.
-* Changed the plugin directory/text domain to zen-by-mpty before public distribution.
-
-= 0.4.4 =
-* Removed the hidden-item counter from the settings screen because it did not provide useful configuration context.
-* Kept the temporary Pause Zen / Resume Zen control as the only reveal mechanism.
-* No classifier or suppression behavior changes.
-
-= 0.4.3 =
-* Changed the suppression counter to show unique hidden items on the current admin page only.
-* Removed the accumulated browser-tab count and the unnecessary reset control.
-* Simplified temporary reveal wording and removed ambiguous browser-tab terminology.
-* Simplified settings labels and descriptions.
-* Classifier behavior is unchanged.
-
-= 0.4.2 =
-* Reviewed and simplified all user-facing plugin text for clarity and consistency.
-* Clarified the safety model: important notices stay visible and uncertain items are left visible.
-* Simplified settings labels, descriptions and temporary controls.
-* Simplified the WordPress.org description and FAQ.
-* No classifier or suppression behavior changes.
-
-= 0.4.1 =
-* Added the required WordPress.org readme "Tested up to" metadata after Plugin Check identified the missing header.
-* No classifier or runtime behavior changes.
-
-= 0.4.0 =
-* Renamed the earlier cleanup prototype to the previous Zen development identity.
-* Removed all public-site/footer-credit functionality and frontend assets.
-* Made important-notice protection mandatory rather than user-disableable.
-* Split classifier scoring into a testable, dependency-free core module.
-* Added conservative regression coverage for promotional, review, operational and ambiguous cases, including the real CookieYes review nag and image-only promotion patterns.
-* Added opt-in development diagnostics that expose decision, scores and signal names without notice contents.
-* Added per-element decision caching and bounded mutation processing to reduce repeated classification work.
-* Reworked temporary reveal into a browser-tab pause/resume control.
-* Simplified settings UI to native WordPress controls.
-* Added deterministic release packaging and release validation tooling in the development source.
+* Initial WordPress.org release.
+* Conservatively filters promotional notices, review requests, upgrade offers and sales banners.
+* Keeps important operational notices and uncertain content visible.
+* Includes session-only Pause and Resume controls with original display and accessibility-state restoration.
+* Runs locally without remote requests, analytics or telemetry.
 
 == Upgrade Notice ==
 
 = 0.7.1 =
-Completes the distributed GPL license materials and strengthens conservative operational-notice protection.
+Initial WordPress.org release of Zen by MPTY.
