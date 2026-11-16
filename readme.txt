@@ -64,8 +64,8 @@ No. Zen works locally and makes no remote requests.
 
 == Screenshots ==
 
-1. Choose which kinds of promotional clutter Zen should hide.
-2. Zen reports the local status of other MPTY tools without remote requests or automatic actions.
+1. Zen is active with conservative promotional filtering enabled and the eligible fictional promotion hidden.
+2. Zen is paused, restoring the fictional promotion while keeping the saved suppression settings unchanged.
 
 == Changelog ==
 
