@@ -9,6 +9,7 @@ const css = fs.readFileSync(path.join(__dirname, '../../assets/css/admin.css'), 
 
 test('admin UI follows the canonical MPTY header geometry', () => {
 	assert.match(css, /\.mpty-ui__product-icon-box\s*{[^}]*width:\s*36px;[^}]*height:\s*36px;[^}]*flex:\s*0 0 36px;/s);
+	assert.match(css, /\.mpty-ui__product-icon\s*{[^}]*width:\s*36px;[^}]*height:\s*36px;/s);
 	assert.match(css, /\.mpty-ui h1\s*{[^}]*font-size:\s*30px;[^}]*font-weight:\s*700;[^}]*letter-spacing:\s*-0\.5px;[^}]*line-height:\s*45px;/s);
 	assert.match(css, /\.mpty-ui__product-purpose\s*{[^}]*margin:\s*4px 0 0;[^}]*font-size:\s*14px;[^}]*line-height:\s*21px;/s);
 	assert.match(css, /\.mpty-ui__quiet-link\s*{[^}]*display:\s*inline-flex;[^}]*gap:\s*8px;[^}]*min-height:\s*44px;[^}]*color:\s*var\(--mpty-accent\);[^}]*font-size:\s*14px;[^}]*font-weight:\s*400;[^}]*line-height:\s*20px;[^}]*text-decoration-thickness:\s*1px;[^}]*text-underline-offset:\s*3px;/s);
@@ -27,6 +28,7 @@ test('admin UI uses selective containment without legacy patch rules', () => {
 
 test('admin UI retains responsive and accessible control states', () => {
 	assert.match(css, /@media \(max-width:\s*720px\)[\s\S]*\.mpty-ui__product-icon-box\s*{[^}]*width:\s*32px;[^}]*height:\s*32px;/);
+	assert.match(css, /@media \(max-width:\s*720px\)[\s\S]*\.mpty-ui__product-icon\s*{[^}]*width:\s*32px;[^}]*height:\s*32px;/);
 	assert.match(css, /:focus-visible\s*{[^}]*outline:\s*3px solid var\(--mpty-focus\);[^}]*outline-offset:\s*3px;/s);
 	assert.match(css, /@media \(forced-colors:\s*active\)/);
 });

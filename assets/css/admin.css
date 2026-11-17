@@ -96,13 +96,9 @@
 
 .mpty-ui__product-icon {
 	display: block;
-	width: 29px;
-	height: 29px;
+	width: 36px;
+	height: 36px;
 	flex: 0 0 auto;
-	stroke: currentColor;
-	stroke-linecap: round;
-	stroke-linejoin: round;
-	stroke-width: 1.75;
 }
 
 .mpty-ui__product-purpose {
@@ -440,8 +436,8 @@
 	}
 
 	.mpty-ui__product-icon {
-		width: 27px;
-		height: 27px;
+		width: 32px;
+		height: 32px;
 	}
 
 	.mpty-ui__header-utilities {

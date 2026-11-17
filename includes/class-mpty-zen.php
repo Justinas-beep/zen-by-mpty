@@ -219,11 +219,7 @@ final class MPTY_Zen {
 			<header class="mpty-ui__header">
 				<div class="mpty-ui__product-lockup">
 					<span class="mpty-ui__product-icon-box">
-						<svg class="mpty-ui__product-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-							<path d="M3 6h18"></path>
-							<path d="M5 12h14"></path>
-							<path d="M8 18h8"></path>
-						</svg>
+						<img class="mpty-ui__product-icon" src="<?php echo esc_url( MPTY_ZEN_URL . 'assets/images/zen.svg' ); ?>" alt="" aria-hidden="true">
 					</span>
 					<div>
 						<h1><?php echo esc_html__( 'Zen by MPTY', 'zen-by-mpty' ); ?></h1>

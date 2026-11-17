@@ -10,6 +10,7 @@
 return array(
 	'LICENSE',
 	'assets/css/admin.css',
+	'assets/images/zen.svg',
 	'assets/js/admin.js',
 	'assets/js/classifier.js',
 	'includes/class-mpty-zen.php',
