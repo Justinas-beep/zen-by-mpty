@@ -4,7 +4,7 @@ Tags: admin, notices, cleanup, productivity, dashboard
 Requires at least: 6.4
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.7.1
+Stable tag: 0.7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -64,10 +64,14 @@ No. Zen works locally and makes no remote requests.
 
 == Screenshots ==
 
-1. Zen is active with conservative promotional filtering enabled and the eligible fictional promotion hidden.
-2. Zen is paused, restoring the fictional promotion while keeping the saved suppression settings unchanged.
+1. Choose which promotional content Zen hides while keeping your WordPress settings available.
+2. Pause Zen to show hidden promotions temporarily, then resume without changing your saved settings.
 
 == Changelog ==
+
+= 0.7.2 =
+* Aligns the settings header with the approved MPTY product identity.
+* Keeps notice filtering, Pause/Resume and saved settings unchanged.
 
 = 0.7.1 =
 * Initial WordPress.org release.
@@ -77,6 +81,9 @@ No. Zen works locally and makes no remote requests.
 * Runs locally without remote requests, analytics or telemetry.
 
 == Upgrade Notice ==
+
+= 0.7.2 =
+Updated product branding. Notice filtering and Pause/Resume behavior are unchanged.
 
 = 0.7.1 =
 Initial WordPress.org release of Zen by MPTY.
